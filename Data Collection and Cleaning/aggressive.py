@@ -30,7 +30,7 @@ tariff discussions even without the word "tariff."
 
 HOW TARIFF ANALYSIS WORKS:
 1. Load all cleaned Trump posts from CSV file
-2. AI reads each post and answers 10 specific questions:
+2. AI reads each post and answers 8 specific questions:
    - Is this about tariffs/trade? (Yes/No)
    - How confident is the AI? (0-100%)
    - What type of tariff? (China, Mexico, EU, General)
@@ -38,8 +38,6 @@ HOW TARIFF ANALYSIS WORKS:
    - Specific percentage? (100%, 25%, etc.)
    - What tone? (Aggressive, Defensive, Informational)
    - Key phrases used? (e.g., "reciprocal trade", "unfair practices")
-   - Action type? (announcing, threatening, or no_mention)
-   - Effective date? (Specific date for tariff implementation if mentioned)
    - Why did AI make this decision? (brief explanation)
 3. Processes posts in batches of 10 for efficiency
 4. Saves complete results with all AI analysis
@@ -157,9 +155,7 @@ class TariffClassifier:
     5. Specific tariff rate? (25%, 100%, 60% on Mexico, etc.)
     6. What tone? (Aggressive, Defensive, Celebratory, Informational, Neutral)
     7. Key phrases used? ("Reciprocal trade", "Unfair practices", "Trade war")
-    8. Action type? (announcing, threatening, or no_mention)
-    9. Effective date? (Specific date mentioned for tariff implementation)
-    10. Why this classification? (Brief AI explanation)
+    8. Why this classification? (Brief AI explanation)
     
     Technical Optimization Features:
     - Batch processing: 10 posts per AI call (5x faster than one-by-one)
@@ -180,7 +176,7 @@ class TariffClassifier:
     - Cost: $7-10 full analysis, $1-2 pre-filtered
     
     Example Classification Output:
-    Post: "China will pay 100% tariffs starting January 20th if they don't change unfair practices!"
+    Post: "China will pay 100% tariffs if they don't change unfair practices!"
     AI Analysis:
     - Tariff-related: TRUE (100% confidence)
     - Type: China tariffs
@@ -188,9 +184,7 @@ class TariffClassifier:
     - Percentage: 100%
     - Tone: Aggressive
     - Key phrases: "100% tariffs", "unfair practices"
-    - Action type: threatening (conditional statement)
-    - Effective date: January 20th
-    - Explanation: Conditional tariff threat targeting China with specific percentage and date
+    - Explanation: Direct mention of tariffs targeting China with specific percentage
     """
     def __init__(self, api_key: str, batch_size: int = 10, parallel: bool = False, max_workers: int = 3):
         """
@@ -354,29 +348,29 @@ class TariffClassifier:
         What this does (talking to the AI):
         This function writes a clear set of instructions for Claude AI, like giving
         a research assistant a detailed assignment: "Read these 10 posts. For each one,
-        answer these 10 questions about tariffs. Use this exact format. Be precise."
+        answer these 8 questions about tariffs. Use this exact format. Be precise."
         
         Prompt Engineering Explained:
         Good AI prompts are like clear homework instructions. This prompt tells Claude:
         1. What to analyze (Truth Social posts about trade/tariffs)
         2. Exact output format (pipe-separated values, one line per post)
         3. Classification criteria (what counts as tariff-related)
-        4. 10 specific questions to answer for each post (added 2 new fields)
+        4. 8 specific questions to answer for each post
         5. Examples of what to look for (direct mentions, indirect implications)
         6. Tone guidelines (be conservative, explain reasoning)
         
         Output Format Specification:
         The AI must respond in this exact format (no extra text):
-        TWEET_ID|IS_TARIFF_RELATED|CONFIDENCE|TARIFF_TYPE|COUNTRIES|PERCENTAGE|SENTIMENT|KEY_PHRASES|TARIFF_ACTION_TYPE|EFFECTIVE_DATE|EXPLANATION
+        TWEET_ID|IS_TARIFF_RELATED|CONFIDENCE|TARIFF_TYPE|COUNTRIES|PERCENTAGE|SENTIMENT|KEY_PHRASES|EXPLANATION
         
         Example AI Response for 2 posts:
-        12345|TRUE|95|China|China|100%|Aggressive|100% tariffs, unfair practices|announcing|January 20, 2025|Direct China tariff announcement
-        12346|FALSE|98|None||25%|Neutral|||no_mention||No trade/tariff content
+        12345|TRUE|95|China|China|100%|Aggressive|100% tariffs, unfair practices|Direct China tariff threat
+        12346|FALSE|98|None||25%|Neutral||||No trade/tariff content
         
         Why Pipe-Separated Format?
         - Easy to parse (split by | character)
         - Handles commas/quotes in post content
-        - Fixed 11-column structure (predictable)
+        - Fixed 9-column structure (predictable)
         - More reliable than JSON (AI sometimes breaks JSON formatting)
         
         Parameters:
@@ -389,7 +383,7 @@ class TariffClassifier:
         prompt = """Analyze these Truth Social posts from Donald Trump and classify each one for tariff/trade content.
 
 For each tweet, respond with this exact format (one line per tweet):
-TWEET_ID|IS_TARIFF_RELATED|CONFIDENCE|TARIFF_TYPE|COUNTRIES|PERCENTAGE|SENTIMENT|KEY_PHRASES|TARIFF_ACTION_TYPE|EFFECTIVE_DATE|EXPLANATION
+TWEET_ID|IS_TARIFF_RELATED|CONFIDENCE|TARIFF_TYPE|COUNTRIES|PERCENTAGE|SENTIMENT|KEY_PHRASES|EXPLANATION
 
 Where:
 - TWEET_ID: The post_id from the tweet
@@ -397,11 +391,9 @@ Where:
 - CONFIDENCE: 0-100
 - TARIFF_TYPE: China, BRICS, Mexico, EU, General, or None
 - COUNTRIES: Comma-separated list of countries mentioned
-- PERCENTAGE: Specific tariff percentage if mentioned (e.g., "100%", "25%"), or empty
+- PERCENTAGE: Specific tariff percentage if mentioned, or empty
 - SENTIMENT: Aggressive, Defensive, Celebratory, Informational, or Neutral
 - KEY_PHRASES: Comma-separated key phrases about tariffs
-- TARIFF_ACTION_TYPE: "announcing" (definitive action), "threatening" (conditional), or "no_mention" (no tariff announcement/threat)
-- EFFECTIVE_DATE: Specific date mentioned for tariff implementation (e.g., "January 20, 2025", "March 1st", "immediately"), or empty
 - EXPLANATION: Brief explanation
 
 Classification rules:
@@ -409,27 +401,11 @@ Classification rules:
 - Look for indirect references: "100% duties", "trade retaliation", "reciprocal trade", "unfair trade"
 - Be conservative: only classify as tariff-related if there's clear indication
 
-TARIFF_ACTION_TYPE rules:
-- "announcing": Definitive statements about implementing US tariffs (e.g., "I am imposing", "We will implement", "United States will impose", "Effective immediately", "I have signed")
-  * IMPORTANT: Focus on US actions, even if responding to other countries' actions
-  * Look for phrases like "we will impose", "US will implement", "America will", "starting [date] we"
-  * If the tweet says the US/America/We WILL impose tariffs, it's "announcing" regardless of context
-- "threatening": Conditional statements about potential US tariffs (e.g., "If China doesn't...", "They have 30 days or face", "Unless they change")
-- "no_mention": Tweet doesn't announce or threaten US tariffs on imports from other countries
-  * Only use this if the tweet talks ONLY about other countries' actions with NO US tariff response
-
-EFFECTIVE_DATE rules:
-- Extract specific dates mentioned for US tariff implementation (e.g., "January 20, 2025", "starting March 1st", "on February 15th", "November 1st, 2025")
-- Include relative dates if clear (e.g., "effective immediately", "within 30 days", "on inauguration day", "Day One")
-- Look for date ranges (e.g., "starting November 1st" or "November 1st (or sooner)")
-- Leave empty if no date mentioned
-
 Analyze these tweets:"""
         
         for i, tweet in enumerate(tweets):
-            # Include first 1500 characters to capture full context (most tweets are < 1500 chars)
-            # This ensures we don't miss important details that appear later in longer tweets
-            prompt += f"\n\nTweet {i+1} (ID: {tweet.get('post_id', 'unknown')}):\n{tweet.get('content', '')[:1500]}..."
+            # Include first 500 characters to keep prompt reasonable length
+            prompt += f"\n\nTweet {i+1} (ID: {tweet.get('post_id', 'unknown')}):\n{tweet.get('content', '')[:500]}..."
             
         return prompt
         
@@ -471,13 +447,13 @@ Analyze these tweets:"""
         
         Example Input/Output:
         Input AI Response:
-        12345|TRUE|95|China|China|100%|Aggressive|100% tariffs, unfair practices|announcing|January 20, 2025|Direct China tariff announcement
-        12346|FALSE|98|None||25%|Neutral|||no_mention||No trade content
+        12345|TRUE|95|China|China|100%|Aggressive|100% tariffs, unfair practices|Direct China threat
+        12346|FALSE|98|None||25%|Neutral||||No trade content
         
         Output Enhanced Tweet:
         {
           'post_id': '12345',
-          'content': 'China will pay 100% tariffs starting January 20th!',
+          'content': 'China will pay 100% tariffs!',
           'date': '2025-10-18',
           ...original fields...,
           'is_tariff_related': True,
@@ -487,9 +463,7 @@ Analyze these tweets:"""
           'tariff_percentage': '100%',
           'sentiment': 'Aggressive',
           'key_phrases': ['100% tariffs', 'unfair practices'],
-          'tariff_action_type': 'announcing',
-          'tariff_effective_date': 'January 20, 2025',
-          'explanation': 'Direct China tariff announcement'
+          'explanation': 'Direct China threat'
         }
         """
         classified_tweets = []
@@ -522,8 +496,6 @@ Analyze these tweets:"""
             tweet_copy['tariff_percentage'] = ''
             tweet_copy['sentiment'] = 'Neutral'
             tweet_copy['key_phrases'] = []
-            tweet_copy['tariff_action_type'] = 'no_mention'
-            tweet_copy['tariff_effective_date'] = ''
             tweet_copy['explanation'] = 'No classification provided'
             
             # Try to match this tweet with corresponding AI response line
@@ -567,19 +539,9 @@ Analyze these tweets:"""
                         phrases = [p.strip() for p in parts[7].split(',') if p.strip()]
                         tweet_copy['key_phrases'] = phrases
                     
-                    if len(parts) > 8 and parts[8]:
-                        # Tariff action type: announcing, threatening, or no_mention
-                        action = parts[8].lower().strip()
-                        if action in ['announcing', 'threatening', 'no_mention']:
-                            tweet_copy['tariff_action_type'] = action
-                    
-                    if len(parts) > 9 and parts[9]:
-                        # Effective date: Specific date or relative time
-                        tweet_copy['tariff_effective_date'] = parts[9].strip()
-                    
-                    # Explanation: Everything after 10th field
-                    if len(parts) > 10:
-                        tweet_copy['explanation'] = '|'.join(parts[10:])
+                    # Explanation: Everything after 8th field
+                    if len(parts) > 8:
+                        tweet_copy['explanation'] = '|'.join(parts[8:])
                     
                     # If we got a confidence score > 0, mark as successfully classified
                     if tweet_copy['confidence'] > 0:
@@ -851,9 +813,7 @@ def save_results(classified_tweets: List[Dict], output_prefix: str):
     - tariff_percentage: "100%", "25%", "60% on Mexico", or empty
     - sentiment: Aggressive, Defensive, Informational, Neutral
     - key_phrases: ["reciprocal trade", "unfair practices", "trade war"]
-    - tariff_action_type: "announcing", "threatening", or "no_mention"
-    - tariff_effective_date: "January 20, 2025", "immediately", "March 1st", or empty
-    - explanation: AI's reasoning ("Direct China tariff announcement with specific date")
+    - explanation: AI's reasoning ("Direct China tariff threat at 100%")
     
     File Details:
     JSON: tariff_classified_tweets.json (~10-20 MB, preserves all structure)
@@ -897,199 +857,96 @@ def save_results(classified_tweets: List[Dict], output_prefix: str):
 
 def main():
     """
-    Main analysis function coordinating complete tariff classification pipeline.
-    
-    Complete AI Analysis Workflow:
-    This orchestrates the entire process from loading posts to generating insights:
-    1. Parse command line arguments (API key, options, limits)
-    2. Initialize TariffClassifier with your settings
-    3. Load checkpoint if resuming interrupted analysis
-    4. Read cleaned posts from CSV (skip already-processed ones)
-    5. Apply pre-filtering if enabled (skip obvious non-tariff posts)
-    6. Run AI classification with progress bars and error handling
-    7. Save complete results to JSON/CSV/checkpoint files
-    8. Generate executive summary with key statistics and insights
-    9. Display final results (tariff percentage, top countries, etc.)
-    
-    Command Line Options Explained:
-    - api_key: REQUIRED - Your Anthropic API key for Claude access
-    - --input: CSV file with posts (default: trump_truth_archive_clean.csv)
-    - --output: Results filename prefix (default: tariff_classified_tweets)
-    - --batch-size: Posts per AI call (10=default, 20=faster/more expensive)
-    - --limit: Analyze only first N posts (100=testing, None=complete)
-    - --parallel: Run multiple AI calls simultaneously (faster on M4 Max)
-    - --max-workers: Parallel threads (3=default, 5=aggressive)
-    - --pre-filter: Skip obvious non-tariff posts (saves 90% cost/time)
-    - --resume: Continue from checkpoint.json (don't re-analyze done posts)
-    - --checkpoint: Progress file location (default: checkpoint.json)
-    
-    Example Commands:
-    FULL ANALYSIS (complete 2,562 posts):
-    python3 tariff_classifier_optimized.py sk-ant-api03-...
-    
-    FAST ANALYSIS (pre-filter + parallel):
-    python3 tariff_classifier_optimized.py sk-ant-api03-... --pre-filter --parallel --batch-size 20
-    
-    TEST RUN (first 100 posts):
-    python3 tariff_classifier_optimized.py sk-ant-api03-... --limit 100
-    
-    RESUME AFTER INTERRUPTION:
-    python3 tariff_classifier_optimized.py sk-ant-api03-... --resume
-    
-    Memory & Performance Optimization:
-    - Your M4 Max/128GB handles 10,000+ posts easily
-    - Streaming CSV reading (no loading entire file at once)
-    - Batch processing (10 posts per $0.04 AI call)
-    - Parallel execution (3x speedup on multi-core Mac)
-    - Checkpoint every 100 posts (resume from any point)
-    
-    Progress Monitoring:
-    Real-time console updates show:
-    - Model/batch/parallel settings confirmation
-    - Post loading progress ("Loaded 2,562 tweets")
-    - Pre-filter results ("209 likely relevant, 2,353 skipped")
-    - AI analysis progress bar ("Classifying: 85%|████████▌ | 2,178/2,562")
-    - Batch-by-batch results ("Batch 45: 3/10 tariff-related")
-    - Error tracking ("5 timeouts, 0 parsing errors")
-    
-    Cost & Time Estimates:
-    FULL RUN (no pre-filter): 2,562 posts, 256 batches, $7.68, 52 minutes
-    PRE-FILTERED RUN: 209 posts, 21 batches, $0.63, 4.5 minutes  
-    PARALLEL RUN: 2-3x faster but same cost (leverages M4 Max cores)
-    TEST RUN (100 posts): $0.30, 2 minutes (good for verification)
-    
-    Output File Details:
-    JSON: Complete structured data with all AI analysis (10-20 MB)
-    CSV: Excel-ready with comma-separated fields (3-5 MB)  
-    Log: Detailed processing record with timestamps (50-200 KB)
-    Checkpoint: Progress save for resuming (1-5 MB)
-    
-    Quality Assurance:
-    - Parsing success rate: 98-99% (robust error handling)
-    - Confidence filtering: Posts <50% confidence flagged for review
-    - Duplicate detection: Post_id prevents re-analysis
-    - Validation: Cross-checks AI results against keyword matches
+    Load tariff-classified tweets and filter for aggressive sentiment only.
+    Additional filters: Date (April 3rd onwards) and actual tariff announcement flag.
+    Output to single CSV file: aggressive_tweets.csv
     """
-    # Parse command line arguments for flexible configuration
-    parser = argparse.ArgumentParser(description='Classify Trump tweets for tariff content')
-    parser.add_argument('api_key', help='Anthropic API key')
-    parser.add_argument('--input', default='trump_truth_archive_clean.csv', help='Input CSV file')
-    parser.add_argument('--output', default='tariff_classified_tweets', help='Output file prefix')
-    parser.add_argument('--batch-size', type=int, default=10, help='Batch size for API calls')
-    parser.add_argument('--limit', type=int, help='Limit number of tweets to process')
-    parser.add_argument('--parallel', action='store_true', help='Enable parallel processing')
-    parser.add_argument('--max-workers', type=int, default=3, help='Max parallel workers')
-    parser.add_argument('--pre-filter', action='store_true', help='Pre-filter tweets for speed')
-    parser.add_argument('--resume', action='store_true', help='Resume from checkpoint')
-    parser.add_argument('--checkpoint', default='checkpoint.json', help='Checkpoint file')
+    # Load the full tariff classification results
+    input_file = 'Data Collection and Cleaning/tariff_classified_tweets_full.json'
+    output_file = 'Data Collection and Cleaning/aggressive_tweets.csv'
     
-    args = parser.parse_args()
-    
-    # Display configuration and start analysis
-    print("Trump Tweet Tariff Classifier (Optimized)")
-    print("=" * 50)
-    print(f"Model: Claude Sonnet 4.5")
-    print(f"Batch size: {args.batch_size}")
-    print(f"Parallel: {args.parallel}")
-    if args.parallel:
-        print(f"Max workers: {args.max_workers}")
-    print(f"Pre-filter: {args.pre_filter}")
+    print("Aggressive Tariff Tweets Filter")
     print("=" * 50)
     
-    # Initialize AI classifier with your settings
-    classifier = TariffClassifier(
-        args.api_key, 
-        batch_size=args.batch_size,
-        parallel=args.parallel,
-        max_workers=args.max_workers
-    )
-    classifier.stats['start_time'] = datetime.now()
+    # Load JSON data
+    print(f"Loading tweets from {input_file}...")
+    with open(input_file, 'r', encoding='utf-8') as f:
+        all_tweets = json.load(f)
     
-    # Load previous progress if resuming
-    checkpoint_data = load_checkpoint(args.checkpoint) if args.resume else {'processed_ids': [], 'results': []}
-    processed_ids = set(checkpoint_data['processed_ids'])
-    all_results = checkpoint_data['results']
+    print(f"Loaded {len(all_tweets)} total tweets")
     
-    # Step 1: Load tweets from CSV (skip empty content and already-processed)
-    classifier.log(f"Loading tweets from {args.input}...")
-    tweets = []
-    with open(args.input, 'r', encoding='utf-8') as f:
-        reader = csv.DictReader(f)
-        for row in reader:
-            # Skip posts with no content (data cleaning issue)
-            if not row.get('content', '').strip():
+    # Filter for aggressive tariff-related tweets only from April 3rd onwards
+    # and with actual tariff announcement
+    aggressive_tweets = []
+    for tweet in all_tweets:
+        # Check if tweet is tariff-related and has aggressive sentiment
+        if (tweet.get('is_tariff_related', False) and 
+            tweet.get('sentiment', '').lower() == 'aggressive'):
+            
+            # Check if tweet is from April 3rd onwards
+            tweet_date_str = tweet.get('date', '')
+            try:
+                tweet_date = datetime.strptime(tweet_date_str, '%Y-%m-%d')
+                target_date = datetime.strptime('2025-04-03', '%Y-%m-%d')
+                if tweet_date >= target_date:
+                    # Add flag to assess if there's an actual tariff announcement
+                    content = tweet.get('content', '').lower()
+                    # Keywords indicating actual tariff announcements
+                    announcement_keywords = [
+                        'announce', 'announcing', 'declaration', 'declare',
+                        'implement', 'implementing', 'impose', 'imposing',
+                        'levy', 'levying', 'enforce', 'enforcing'
+                    ]
+                    has_announcement = any(keyword in content for keyword in announcement_keywords)
+                    tweet['has_tariff_announcement'] = has_announcement
+                    
+                    aggressive_tweets.append(tweet)
+            except ValueError:
+                # If date parsing fails, skip the tweet
                 continue
-            # Skip already analyzed posts (resume capability)
-            if row.get('post_id') in processed_ids:
-                continue
-            tweets.append(row)
-            # Stop if limit reached (testing mode)
-            if args.limit and len(tweets) >= args.limit:
-                break
     
-    classifier.log(f"Loaded {len(tweets)} tweets to process")
+    print(f"Found {len(aggressive_tweets)} aggressive tariff tweets from April 3rd onwards")
     
-    if not tweets:
-        classifier.log("No tweets to process!", "WARN")
+    if not aggressive_tweets:
+        print("No aggressive tariff tweets found!")
         return
     
-    # Step 2: Pre-filtering (optional - skips obvious non-tariff posts)
-    if args.pre_filter:
-        classifier.log("Pre-filtering tweets...")
-        likely_relevant, likely_irrelevant = classifier.pre_filter_tweets(tweets)
-        classifier.log(f"Pre-filter: {len(likely_relevant)} likely relevant, {len(likely_irrelevant)} likely irrelevant")
+    # Save to CSV
+    print(f"Saving to {output_file}...")
+    with open(output_file, 'w', newline='', encoding='utf-8') as f:
+        # Prepare data for CSV (convert lists to comma-separated strings)
+        csv_tweets = []
+        for tweet in aggressive_tweets:
+            tweet_copy = tweet.copy()
+            if isinstance(tweet_copy.get('countries_mentioned'), list):
+                tweet_copy['countries_mentioned'] = ', '.join(tweet_copy['countries_mentioned'])
+            if isinstance(tweet_copy.get('key_phrases'), list):
+                tweet_copy['key_phrases'] = ', '.join(tweet_copy['key_phrases'])
+            csv_tweets.append(tweet_copy)
         
-        # Mark irrelevant posts as non-tariff (no AI needed, high confidence)
-        for tweet in likely_irrelevant:
-            tweet.update({
-                'is_tariff_related': False,
-                'confidence': 90,  # High confidence - keyword filter is reliable
-                'tariff_type': 'None',
-                'countries_mentioned': [],
-                'tariff_percentage': '',
-                'sentiment': 'Neutral',
-                'key_phrases': [],
-                'tariff_action_type': 'no_mention',
-                'tariff_effective_date': '',
-                'explanation': 'Pre-filtered as non-tariff content'
-            })
-            all_results.append(tweet)
-        
-        tweets_to_classify = likely_relevant  # Only analyze likely tariff posts
-    else:
-        tweets_to_classify = tweets  # Analyze everything with AI
+        # Write CSV with headers
+        writer = csv.DictWriter(f, fieldnames=csv_tweets[0].keys())
+        writer.writeheader()
+        writer.writerows(csv_tweets)
     
-    # Step 3: Run AI classification with progress tracking
-    if tweets_to_classify:
-        classifier.log(f"Classifying {len(tweets_to_classify)} tweets...")
-        with tqdm(total=len(tweets_to_classify), desc="Classifying", unit="tweet") as pbar:
-            classified = classifier.classify_tweets_batch(tweets_to_classify, progress_bar=pbar)
-            all_results.extend(classified)
+    print(f"✓ Saved {len(aggressive_tweets)} aggressive tariff tweets to {output_file}")
     
-    # Step 4: Finalize statistics
-    classifier.stats['end_time'] = datetime.now()
-    classifier.stats['tariff_related'] = sum(1 for t in all_results if t.get('is_tariff_related', False))
+    # Show breakdown by tariff type
+    tariff_types = {}
+    announcement_count = 0
+    for tweet in aggressive_tweets:
+        tariff_type = tweet.get('tariff_type', 'Unknown')
+        tariff_types[tariff_type] = tariff_types.get(tariff_type, 0) + 1
+        if tweet.get('has_tariff_announcement', False):
+            announcement_count += 1
     
-    # Step 5: Save all results and checkpoint
-    classifier.log("Saving results...")
-    save_results(all_results, args.output)
+    print("\nBreakdown by tariff type:")
+    for tariff_type, count in sorted(tariff_types.items(), key=lambda x: x[1], reverse=True):
+        print(f"  {tariff_type}: {count}")
     
-    # Update checkpoint with final progress
-    processed_ids_list = [t.get('post_id') for t in all_results]
-    save_checkpoint(args.checkpoint, processed_ids_list, all_results)
+    print(f"\nTweets with actual tariff announcements: {announcement_count}/{len(aggressive_tweets)} ({round(announcement_count/len(aggressive_tweets)*100, 1)}%)")
     
-    # Step 6: Generate executive summary
-    duration = (classifier.stats['end_time'] - classifier.stats['start_time']).total_seconds()
-    print("\n" + "=" * 50)
-    print("CLASSIFICATION COMPLETE!")
     print("=" * 50)
-    print(f"Total tweets processed: {len(all_results):,}")
-    print(f"Tariff-related tweets: {classifier.stats['tariff_related']:,}")
-    print(f"Percentage tariff-related: {(classifier.stats['tariff_related']/len(all_results)*100):.1f}%")
-    print(f"API calls made: {classifier.stats['api_calls']:,}")
-    print(f"Errors: {classifier.stats['errors']:,}")
-    print(f"Duration: {duration/60:.1f} minutes")
-    print(f"Speed: {len(all_results)/duration*60:.1f} tweets/minute")
 
 if __name__ == "__main__":
     main()

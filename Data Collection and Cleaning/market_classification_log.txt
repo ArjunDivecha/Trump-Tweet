@@ -1,0 +1,542 @@
+[2025-10-20 16:39:48] ================================================================================
+[2025-10-20 16:39:48] MARKET SENTIMENT CLASSIFIER - ALL TRUMP TWEETS
+[2025-10-20 16:39:48] ================================================================================
+[2025-10-20 16:39:48] 
+[2025-10-20 16:39:48] Loading tweet data...
+[2025-10-20 16:39:48] ✓ Loaded 2562 tweets
+[2025-10-20 16:40:05] ================================================================================
+[2025-10-20 16:40:05] MARKET SENTIMENT CLASSIFIER - ALL TRUMP TWEETS
+[2025-10-20 16:40:05] ================================================================================
+[2025-10-20 16:40:05] 
+[2025-10-20 16:40:05] Loading tweet data...
+[2025-10-20 16:40:05] ✓ Loaded 2562 tweets
+[2025-10-20 16:40:05]   Tweets with valid dates: 2537
+[2025-10-20 16:40:05] 
+[2025-10-20 16:40:05] Starting classification from index 0...
+[2025-10-20 16:40:05] Total tweets to process: 2562
+[2025-10-20 16:40:05] 
+[2025-10-20 16:40:05] Batch 1/257 (tweets 0 to 9)
+[2025-10-20 16:40:17]   ✓ Classified 10 tweets
+[2025-10-20 16:40:17]   Sample: '"Trump on TikTok" infographic highlighting @realDonaldTrump as the most followed...'
+[2025-10-20 16:40:17]     → NEUTRAL (90% confidence)
+[2025-10-20 16:40:17]   ✓ Checkpoint saved
+[2025-10-20 16:40:17] 
+[2025-10-20 16:40:18] Batch 2/257 (tweets 10 to 19)
+[2025-10-20 16:40:31]   ✓ Classified 10 tweets
+[2025-10-20 16:40:31]   Sample: 'President @realDonaldTrump: "I'm pleased to announce that we're officially resto...'
+[2025-10-20 16:40:31]     → NEUTRAL (90% confidence)
+[2025-10-20 16:40:31]   ✓ Checkpoint saved
+[2025-10-20 16:40:31] 
+[2025-10-20 16:40:32] Batch 3/257 (tweets 20 to 29)
+[2025-10-20 16:40:43]   ✓ Classified 10 tweets
+[2025-10-20 16:40:43]   Sample: 'Pakistani Prime Minister Shehbaz Sharif praises President @realDonaldTrump at th...'
+[2025-10-20 16:40:43]     → MARKET_FRIENDLY (75% confidence)
+[2025-10-20 16:40:43]   ✓ Checkpoint saved
+[2025-10-20 16:40:43] 
+[2025-10-20 16:40:44] Batch 4/257 (tweets 30 to 39)
+[2025-10-20 16:40:56]   ✓ Classified 10 tweets
+[2025-10-20 16:40:56]   Sample: 'Graph of tariffs revenue as a percentage of total federal receipts from 1798 to ...'
+[2025-10-20 16:40:56]     → MARKET_HOSTILE (80% confidence)
+[2025-10-20 16:40:56]   ✓ Checkpoint saved
+[2025-10-20 16:40:56] 
+[2025-10-20 16:40:57] Batch 5/257 (tweets 40 to 49)
+[2025-10-20 16:41:09]   ✓ Classified 10 tweets
+[2025-10-20 16:41:09]   Sample: 'I am pleased to announce the amazing Team that will be working in conjunction wi...'
+[2025-10-20 16:41:09]     → MARKET_FRIENDLY (80% confidence)
+[2025-10-20 16:41:09]   ✓ Checkpoint saved
+[2025-10-20 16:41:09] 
+[2025-10-20 16:41:10] Batch 6/257 (tweets 50 to 59)
+[2025-10-20 16:41:22]   ✓ Classified 10 tweets
+[2025-10-20 16:41:22]   Sample: 'Congratulations to Speaker Mike Johnson for receiving an unprecedented Vote of C...'
+[2025-10-20 16:41:22]     → MARKET_FRIENDLY (75% confidence)
+[2025-10-20 16:41:22]   ✓ Checkpoint saved
+[2025-10-20 16:41:22] 
+[2025-10-20 16:41:23] Batch 7/257 (tweets 60 to 69)
+[2025-10-20 16:41:35]   ✓ Classified 10 tweets
+[2025-10-20 16:41:35]   Sample: 'D.A. Alvin Bragg never wanted to bring this lawless case against me. He was furi...'
+[2025-10-20 16:41:35]     → NEUTRAL (90% confidence)
+[2025-10-20 16:41:35]   ✓ Checkpoint saved
+[2025-10-20 16:41:35] 
+[2025-10-20 16:41:36] Batch 8/257 (tweets 70 to 79)
+[2025-10-20 16:41:47]   ✓ Classified 10 tweets
+[2025-10-20 16:41:47]   Sample: 'It is my great honor to announce that Joseph Nocella, Jr., will be the next Unit...'
+[2025-10-20 16:41:47]     → NEUTRAL (90% confidence)
+[2025-10-20 16:41:47]   ✓ Checkpoint saved
+[2025-10-20 16:41:47] 
+[2025-10-20 16:41:48] Batch 9/257 (tweets 80 to 89)
+[2025-10-20 16:41:59]   ✓ Classified 10 tweets
+[2025-10-20 16:41:59]   Sample: 'Tweet by Todd Jacob discussing concepts of temporal manipulation and strategic e...'
+[2025-10-20 16:41:59]     → NEUTRAL (90% confidence)
+[2025-10-20 16:41:59]   ✓ Checkpoint saved
+[2025-10-20 16:41:59] 
+[2025-10-20 16:42:00] Batch 10/257 (tweets 90 to 99)
+[2025-10-20 16:42:12]   ✓ Classified 10 tweets
+[2025-10-20 16:42:12]   Sample: 'Elon Musk humorously comments on a photoshopped image showing Joe Biden presenti...'
+[2025-10-20 16:42:12]     → NEUTRAL (90% confidence)
+[2025-10-20 16:42:12]   ✓ Checkpoint saved
+[2025-10-20 16:42:12] 
+[2025-10-20 16:42:13] Batch 11/257 (tweets 100 to 109)
+[2025-10-20 16:42:26]   ✓ Classified 10 tweets
+[2025-10-20 16:42:26]   Sample: 'It won't be long because Europe will be looking at us and we'll be looking at Tr...'
+[2025-10-20 16:42:26]     → NEUTRAL (75% confidence)
+[2025-10-20 16:42:26]   ✓ Checkpoint saved
+[2025-10-20 16:42:26] 
+[2025-10-20 16:42:27] Batch 12/257 (tweets 110 to 119)
+[2025-10-20 16:42:40]   ✓ Classified 10 tweets
+[2025-10-20 16:42:40]   Sample: 'John Nolte, a Pro, was right! https://www.breitbart.com/politics/2024/10/09/http...'
+[2025-10-20 16:42:40]     → NEUTRAL (90% confidence)
+[2025-10-20 16:42:40]   ✓ Checkpoint saved
+[2025-10-20 16:42:40] 
+[2025-10-20 16:42:41] Batch 13/257 (tweets 120 to 129)
+[2025-10-20 16:42:54]   ✓ Classified 10 tweets
+[2025-10-20 16:42:54]   Sample: 'Governor Gavin Newscum should immediately go to Northern California and open up ...'
+[2025-10-20 16:42:54]     → NEUTRAL (80% confidence)
+[2025-10-20 16:42:54]   ✓ Checkpoint saved
+[2025-10-20 16:42:54] 
+[2025-10-20 16:42:55] Batch 14/257 (tweets 130 to 139)
+[2025-10-20 16:43:07]   ✓ Classified 10 tweets
+[2025-10-20 16:43:07]   Sample: 'I am pleased to announce that Bill Briggs will serve as the next Deputy Administ...'
+[2025-10-20 16:43:07]     → MARKET_FRIENDLY (75% confidence)
+[2025-10-20 16:43:07]   ✓ Checkpoint saved
+[2025-10-20 16:43:07] 
+[2025-10-20 16:43:08] Batch 15/257 (tweets 140 to 149)
+[2025-10-20 16:43:20]   ✓ Classified 10 tweets
+[2025-10-20 16:43:20]   Sample: 'A man in a suit stands confidently against a backdrop with bright lights and pat...'
+[2025-10-20 16:43:20]     → NEUTRAL (90% confidence)
+[2025-10-20 16:43:20]   ✓ Checkpoint saved
+[2025-10-20 16:43:20] 
+[2025-10-20 16:43:21] Batch 16/257 (tweets 150 to 159)
+[2025-10-20 16:43:32]   ✓ Classified 10 tweets
+[2025-10-20 16:43:32]   Sample: 'Well, Mr. President. For a second time. Brock, very nice to see you. Congratulat...'
+[2025-10-20 16:43:32]     → NEUTRAL (90% confidence)
+[2025-10-20 16:43:32]   ✓ Checkpoint saved
+[2025-10-20 16:43:32] 
+[2025-10-20 16:43:33] Batch 17/257 (tweets 160 to 169)
+[2025-10-20 16:43:45]   ✓ Classified 10 tweets
+[2025-10-20 16:43:45]   Sample: 'Deranged Jack Smith was unable to successfully prosecute the Political Opponent ...'
+[2025-10-20 16:43:45]     → NEUTRAL (90% confidence)
+[2025-10-20 16:43:45]   ✓ Checkpoint saved
+[2025-10-20 16:43:45] 
+[2025-10-20 16:43:46] Batch 18/257 (tweets 170 to 179)
+[2025-10-20 16:43:57]   ✓ Classified 10 tweets
+[2025-10-20 16:43:57]   Sample: '“Jack Smith has 'no standing' in Trump case anymore, David Schoen says PUT BOTH ...'
+[2025-10-20 16:43:57]     → NEUTRAL (90% confidence)
+[2025-10-20 16:43:57]   ✓ Checkpoint saved
+[2025-10-20 16:43:57] 
+[2025-10-20 16:43:58] Batch 19/257 (tweets 180 to 189)
+[2025-10-20 16:44:09]   ✓ Classified 10 tweets
+[2025-10-20 16:44:09]   Sample: 'This EPIC ceasefire agreement could have only happened as a result of our Histor...'
+[2025-10-20 16:44:09]     → MARKET_FRIENDLY (80% confidence)
+[2025-10-20 16:44:09]   ✓ Checkpoint saved
+[2025-10-20 16:44:09] 
+[2025-10-20 16:44:10] Batch 20/257 (tweets 190 to 199)
+[2025-10-20 16:44:23]   ✓ Classified 10 tweets
+[2025-10-20 16:44:23]   Sample: 'I am pleased to announce that Dudley Hoskins will be the United States Under Sec...'
+[2025-10-20 16:44:23]     → NEUTRAL (80% confidence)
+[2025-10-20 16:44:23]   ✓ Checkpoint saved
+[2025-10-20 16:44:23] 
+[2025-10-20 16:44:24] Batch 21/257 (tweets 200 to 209)
+[2025-10-20 16:44:36]   ✓ Classified 10 tweets
+[2025-10-20 16:44:36]   Sample: 'I just spoke to Chairman Xi Jinping of China. The call was a very good one for b...'
+[2025-10-20 16:44:36]     → MARKET_FRIENDLY (80% confidence)
+[2025-10-20 16:44:36]   ✓ Checkpoint saved
+[2025-10-20 16:44:36] 
+[2025-10-20 16:44:37] Batch 22/257 (tweets 210 to 219)
+[2025-10-20 16:44:49]   ✓ Classified 10 tweets
+[2025-10-20 16:44:49]   Sample: 'As of today, the incoming Trump Administration has hired over 1,000 people for T...'
+[2025-10-20 16:44:49]     → MARKET_FRIENDLY (75% confidence)
+[2025-10-20 16:44:49]   ✓ Checkpoint saved
+[2025-10-20 16:44:49] 
+[2025-10-20 16:44:50] Batch 23/257 (tweets 220 to 229)
+[2025-10-20 16:45:02]   ✓ Classified 10 tweets
+[2025-10-20 16:45:02]   Sample: 'RT: https://truthsocial.com/users/Momo64/statuses/113850059702598568A lot of TRU...'
+[2025-10-20 16:45:02]     → NEUTRAL (90% confidence)
+[2025-10-20 16:45:02]   ✓ Checkpoint saved
+[2025-10-20 16:45:02] 
+[2025-10-20 16:45:03] Batch 24/257 (tweets 230 to 239)
+[2025-10-20 16:45:14]   ✓ Classified 10 tweets
+[2025-10-20 16:45:14]   Sample: 'https://rumble.com/v6b3hk4-president-trumps-celebratory-victory-rally.htmlMelani...'
+[2025-10-20 16:45:14]     → NEUTRAL (90% confidence)
+[2025-10-20 16:45:14]   ✓ Checkpoint saved
+[2025-10-20 16:45:14] 
+[2025-10-20 16:45:15] Batch 25/257 (tweets 240 to 249)
+[2025-10-20 16:45:27]   ✓ Classified 10 tweets
+[2025-10-20 16:45:27]   Sample: 'I give you 1 message to hold in your hearts today. It's this, never, ever give u...'
+[2025-10-20 16:45:27]     → NEUTRAL (75% confidence)
+[2025-10-20 16:45:27]   ✓ Checkpoint saved
+[2025-10-20 16:45:27] 
+[2025-10-20 16:45:28] Batch 26/257 (tweets 250 to 259)
+[2025-10-20 16:45:40]   ✓ Classified 10 tweets
+[2025-10-20 16:45:40]   Sample: 'RT @TeamTrump🚨 President Trump signs an Executive Order to bring reforms to the ...'
+[2025-10-20 16:45:40]     → NEUTRAL (75% confidence)
+[2025-10-20 16:45:40]   ✓ Checkpoint saved
+[2025-10-20 16:45:40] 
+[2025-10-20 16:45:41] Batch 27/257 (tweets 260 to 269)
+[2025-10-20 16:45:55]   ✓ Classified 10 tweets
+[2025-10-20 16:45:55]   Sample: 'Former President Donald Trump delivering a speech at a podium bearing the presid...'
+[2025-10-20 16:45:55]     → NEUTRAL (90% confidence)
+[2025-10-20 16:45:55]   ✓ Checkpoint saved
+[2025-10-20 16:45:55] 
+[2025-10-20 16:45:56] Batch 28/257 (tweets 270 to 279)
+[2025-10-20 16:46:08]   ✓ Classified 10 tweets
+[2025-10-20 16:46:08]   Sample: 'I’m not looking to hurt Russia. I love the Russian people, and always had a very...'
+[2025-10-20 16:46:08]     → MARKET_FRIENDLY (75% confidence)
+[2025-10-20 16:46:08]   ✓ Checkpoint saved
+[2025-10-20 16:46:08] 
+[2025-10-20 16:46:09] Batch 29/257 (tweets 280 to 289)
+[2025-10-20 16:46:22]   ✓ Classified 10 tweets
+[2025-10-20 16:46:22]   Sample: 'Lastly, sir, we have an executive order ordering the declassification of files r...'
+[2025-10-20 16:46:22]     → NEUTRAL (90% confidence)
+[2025-10-20 16:46:22]   ✓ Checkpoint saved
+[2025-10-20 16:46:22] 
+[2025-10-20 16:46:23] Batch 30/257 (tweets 290 to 299)
+[2025-10-20 16:46:34]   ✓ Classified 10 tweets
+[2025-10-20 16:46:34]   Sample: 'Bride and groom walking down the aisle, surrounded by guests, with white flower ...'
+[2025-10-20 16:46:34]     → MARKET_FRIENDLY (80% confidence)
+[2025-10-20 16:46:34]   ✓ Checkpoint saved
+[2025-10-20 16:46:34] 
+[2025-10-20 16:46:35] Batch 31/257 (tweets 300 to 309)
+[2025-10-20 16:46:46]   ✓ Classified 10 tweets
+[2025-10-20 16:46:46]   Sample: 'Congratulations to Chairwoman Gina Swoboda, who I strongly endorsed, for being R...'
+[2025-10-20 16:46:46]     → NEUTRAL (90% confidence)
+[2025-10-20 16:46:46]   ✓ Checkpoint saved
+[2025-10-20 16:46:46] 
+[2025-10-20 16:46:47] Batch 32/257 (tweets 310 to 319)
+[2025-10-20 16:46:59]   ✓ Classified 10 tweets
+[2025-10-20 16:46:59]   Sample: 'Two men in suits sit in a formal office with ornate decor. One is seated behind ...'
+[2025-10-20 16:46:59]     → NEUTRAL (90% confidence)
+[2025-10-20 16:46:59]   ✓ Checkpoint saved
+[2025-10-20 16:46:59] 
+[2025-10-20 16:47:00] Batch 33/257 (tweets 320 to 329)
+[2025-10-20 16:47:11]   ✓ Classified 10 tweets
+[2025-10-20 16:47:11]   Sample: 'Tweet by Dan Patrick expressing support for Donald Trump, referred to as the 47t...'
+[2025-10-20 16:47:11]     → MARKET_FRIENDLY (80% confidence)
+[2025-10-20 16:47:11]   ✓ Checkpoint saved
+[2025-10-20 16:47:11] 
+[2025-10-20 16:47:12] Batch 34/257 (tweets 330 to 339)
+[2025-10-20 16:47:24]   ✓ Classified 10 tweets
+[2025-10-20 16:47:24]   Sample: 'Today, it was my great honor to sign an Executive Order banning the chemical cas...'
+[2025-10-20 16:47:24]     → NEUTRAL (90% confidence)
+[2025-10-20 16:47:24]   ✓ Checkpoint saved
+[2025-10-20 16:47:24] 
+[2025-10-20 16:47:25] Batch 35/257 (tweets 340 to 349)
+[2025-10-20 16:47:36]   ✓ Classified 10 tweets
+[2025-10-20 16:47:36]   Sample: ', featuring an image of Trump with a raised fist, surrounded by people in suits,...'
+[2025-10-20 16:47:36]     → NEUTRAL (90% confidence)
+[2025-10-20 16:47:36]   ✓ Checkpoint saved
+[2025-10-20 16:47:36] 
+[2025-10-20 16:47:37] Batch 36/257 (tweets 350 to 359)
+[2025-10-20 16:47:50]   ✓ Classified 10 tweets
+[2025-10-20 16:47:50]   Sample: 'Text image of a tweet by an account with the username "@elonmusk" criticizing th...'
+[2025-10-20 16:47:50]     → NEUTRAL (80% confidence)
+[2025-10-20 16:47:50]   ✓ Checkpoint saved
+[2025-10-20 16:47:50] 
+[2025-10-20 16:47:51] Batch 37/257 (tweets 360 to 369)
+[2025-10-20 16:48:03]   ✓ Classified 10 tweets
+[2025-10-20 16:48:03]   Sample: 'So sad to see the plane go down in Philadelphia, Pennsylvania. More innocent sou...'
+[2025-10-20 16:48:03]     → NEUTRAL (90% confidence)
+[2025-10-20 16:48:03]   ✓ Checkpoint saved
+[2025-10-20 16:48:03] 
+[2025-10-20 16:48:04] Batch 38/257 (tweets 370 to 379)
+[2025-10-20 16:48:16]   ✓ Classified 10 tweets
+[2025-10-20 16:48:16]   Sample: 'Democrats are purposefully delaying virtually all of my Nominees. No matter how ...'
+[2025-10-20 16:48:16]     → NEUTRAL (90% confidence)
+[2025-10-20 16:48:16]   ✓ Checkpoint saved
+[2025-10-20 16:48:16] 
+[2025-10-20 16:48:17] Batch 39/257 (tweets 380 to 389)
+[2025-10-20 16:48:29]   ✓ Classified 10 tweets
+[2025-10-20 16:48:29]   Sample: 'RT @PaulIngrassiaHonored and Blessed to serve as the White House Liaison in Pres...'
+[2025-10-20 16:48:29]     → NEUTRAL (80% confidence)
+[2025-10-20 16:48:29]   ✓ Checkpoint saved
+[2025-10-20 16:48:29] 
+[2025-10-20 16:48:30] Batch 40/257 (tweets 390 to 399)
+[2025-10-20 16:48:43]   ✓ Classified 10 tweets
+[2025-10-20 16:48:43]   Sample: 'RT @realDonaldTrumpDemocrats are purposefully delaying virtually all of my Nomin...'
+[2025-10-20 16:48:43]     → NEUTRAL (90% confidence)
+[2025-10-20 16:48:43]   ✓ Checkpoint saved
+[2025-10-20 16:48:43] 
+[2025-10-20 16:48:44] Batch 41/257 (tweets 400 to 409)
+[2025-10-20 16:48:56]   ✓ Classified 10 tweets
+[2025-10-20 16:48:56]   Sample: 'Is there any chance that Canada or China could also get out of the tariffs after...'
+[2025-10-20 16:48:56]     → MARKET_HOSTILE (80% confidence)
+[2025-10-20 16:48:56]   ✓ Checkpoint saved
+[2025-10-20 16:48:56] 
+[2025-10-20 16:48:57] Batch 42/257 (tweets 410 to 419)
+[2025-10-20 16:49:08]   ✓ Classified 10 tweets
+[2025-10-20 16:49:08]   Sample: 'A group of three men in suits and red ties walking down a long, red-carpeted hal...'
+[2025-10-20 16:49:08]     → NEUTRAL (90% confidence)
+[2025-10-20 16:49:08]   ✓ Checkpoint saved
+[2025-10-20 16:49:08] 
+[2025-10-20 16:49:09] Batch 43/257 (tweets 420 to 429)
+[2025-10-20 16:49:20]   ✓ Classified 10 tweets
+[2025-10-20 16:49:20]   Sample: 'This is a great honor and a real privilege. I'm thrilled to be here today with o...'
+[2025-10-20 16:49:20]     → NEUTRAL (90% confidence)
+[2025-10-20 16:49:20]   ✓ Checkpoint saved
+[2025-10-20 16:49:20] 
+[2025-10-20 16:49:21] Batch 44/257 (tweets 430 to 439)
+[2025-10-20 16:49:33]   ✓ Classified 10 tweets
+[2025-10-20 16:49:33]   Sample: 'CBS and 60 Minutes defrauded the public by doing something which has never, to t...'
+[2025-10-20 16:49:33]     → NEUTRAL (90% confidence)
+[2025-10-20 16:49:33]   ✓ Checkpoint saved
+[2025-10-20 16:49:33] 
+[2025-10-20 16:49:34] Batch 45/257 (tweets 440 to 449)
+[2025-10-20 16:49:44]   ✓ Classified 10 tweets
+[2025-10-20 16:49:44]   Sample: 'Large conference hall with a crowd seated at tables, watching a speaker projecte...'
+[2025-10-20 16:49:44]     → NEUTRAL (90% confidence)
+[2025-10-20 16:49:44]   ✓ Checkpoint saved
+[2025-10-20 16:49:44] 
+[2025-10-20 16:49:45] Batch 46/257 (tweets 450 to 459)
+[2025-10-20 16:49:56]   ✓ Classified 10 tweets
+[2025-10-20 16:49:56]   Sample: 'Eugene Robinson of the Washington Post is INCOMPETENT! So sad to see him trying ...'
+[2025-10-20 16:49:56]     → NEUTRAL (90% confidence)
+[2025-10-20 16:49:56]   ✓ Checkpoint saved
+[2025-10-20 16:49:56] 
+[2025-10-20 16:49:57] Batch 47/257 (tweets 460 to 469)
+[2025-10-20 16:50:10]   ✓ Classified 10 tweets
+[2025-10-20 16:50:10]   Sample: 'Crooked Joe’s MANDATE, “NO PLASTIC STRAWS, ONLY PAPER,” IS DEAD! Enjoy your next...'
+[2025-10-20 16:50:10]     → NEUTRAL (90% confidence)
+[2025-10-20 16:50:10]   ✓ Checkpoint saved
+[2025-10-20 16:50:10] 
+[2025-10-20 16:50:11] Batch 48/257 (tweets 470 to 479)
+[2025-10-20 16:50:20]   ✓ Classified 10 tweets
+[2025-10-20 16:50:20]   Sample: 'Tweet by Lindsey Graham supporting an executive order by Donald Trump to use Gua...'
+[2025-10-20 16:50:20]     → NEUTRAL (80% confidence)
+[2025-10-20 16:50:21]   ✓ Checkpoint saved
+[2025-10-20 16:50:21] 
+[2025-10-20 16:50:22] Batch 49/257 (tweets 480 to 489)
+[2025-10-20 16:50:33]   ✓ Classified 10 tweets
+[2025-10-20 16:50:33]   Sample: 'The only one that had a tougher night than the Kansas City Chiefs was Taylor Swi...'
+[2025-10-20 16:50:33]     → NEUTRAL (90% confidence)
+[2025-10-20 16:50:33]   ✓ Checkpoint saved
+[2025-10-20 16:50:33] 
+[2025-10-20 16:50:34] Batch 50/257 (tweets 490 to 499)
+[2025-10-20 16:50:47]   ✓ Classified 10 tweets
+[2025-10-20 16:50:47]   Sample: 'Map showing the Gulf of Mexico region, highlighting areas such as Texas, Louisia...'
+[2025-10-20 16:50:47]     → NEUTRAL (90% confidence)
+[2025-10-20 16:50:47]   ✓ Checkpoint saved
+[2025-10-20 16:50:47] 
+[2025-10-20 16:50:48] Batch 51/257 (tweets 500 to 509)
+[2025-10-20 16:51:00]   ✓ Classified 10 tweets
+[2025-10-20 16:51:00]   Sample: 'DOGE: BILLIONS OF DOLLARS OF WASTE, FRAUD, AND ABUSE BRING FOUND. CAMPAIGN PROMI...'
+[2025-10-20 16:51:00]     → MARKET_FRIENDLY (75% confidence)
+[2025-10-20 16:51:00]   ✓ Checkpoint saved
+[2025-10-20 16:51:00] 
+[2025-10-20 16:51:01] Batch 52/257 (tweets 510 to 519)
+[2025-10-20 16:51:14]   ✓ Classified 10 tweets
+[2025-10-20 16:51:14]   Sample: 'A collage showing a man arriving from a plane, greeted warmly by officials in sn...'
+[2025-10-20 16:51:14]     → NEUTRAL (90% confidence)
+[2025-10-20 16:51:14]   ✓ Checkpoint saved
+[2025-10-20 16:51:14] 
+[2025-10-20 16:51:15] Batch 53/257 (tweets 520 to 529)
+[2025-10-20 16:51:28]   ✓ Classified 10 tweets
+[2025-10-20 16:51:28]   Sample: 'GREAT TALKS WITH RUSSIA AND UKRAINE YESTERDAY. GOOD POSSIBILITY OF ENDING THAT H...'
+[2025-10-20 16:51:28]     → MARKET_FRIENDLY (80% confidence)
+[2025-10-20 16:51:28]   ✓ Checkpoint saved
+[2025-10-20 16:51:28] 
+[2025-10-20 16:51:29] Batch 54/257 (tweets 530 to 539)
+[2025-10-20 16:51:41]   ✓ Classified 10 tweets
+[2025-10-20 16:51:41]   Sample: 'President's doing a great job. I want to say this. Look, I work for 6 presidents...'
+[2025-10-20 16:51:41]     → NEUTRAL (90% confidence)
+[2025-10-20 16:51:41]   ✓ Checkpoint saved
+[2025-10-20 16:51:41] 
+[2025-10-20 16:51:42] Batch 55/257 (tweets 540 to 549)
+[2025-10-20 16:51:53]   ✓ Classified 10 tweets
+[2025-10-20 16:51:53]   Sample: 'US will be 'flooded with jobs' as foreign nations avoid tariffs, Trump says http...'
+[2025-10-20 16:51:53]     → MARKET_HOSTILE (90% confidence)
+[2025-10-20 16:51:53]   ✓ Checkpoint saved
+[2025-10-20 16:51:53] 
+[2025-10-20 16:51:54] Batch 56/257 (tweets 550 to 559)
+[2025-10-20 16:52:06]   ✓ Classified 10 tweets
+[2025-10-20 16:52:06]   Sample: 'Tweet by Logan Hall showing an artwork of Napoleon Bonaparte on a rearing horse ...'
+[2025-10-20 16:52:06]     → NEUTRAL (90% confidence)
+[2025-10-20 16:52:06]   ✓ Checkpoint saved
+[2025-10-20 16:52:06] 
+[2025-10-20 16:52:07] Batch 57/257 (tweets 560 to 569)
+[2025-10-20 16:52:17]   ✓ Classified 10 tweets
+[2025-10-20 16:52:17]   Sample: 'A person wearing a "Make America Great Again" hat and a NASCAR jacket stands on ...'
+[2025-10-20 16:52:17]     → NEUTRAL (90% confidence)
+[2025-10-20 16:52:17]   ✓ Checkpoint saved
+[2025-10-20 16:52:17] 
+[2025-10-20 16:52:18] Batch 58/257 (tweets 570 to 579)
+[2025-10-20 16:52:30]   ✓ Classified 10 tweets
+[2025-10-20 16:52:30]   Sample: 'Newspaper article titled "Resist Revenge, Don" written by Rich Lowry, discussing...'
+[2025-10-20 16:52:30]     → NEUTRAL (90% confidence)
+[2025-10-20 16:52:30]   ✓ Checkpoint saved
+[2025-10-20 16:52:30] 
+[2025-10-20 16:52:31] Batch 59/257 (tweets 580 to 589)
+[2025-10-20 16:52:42]   ✓ Classified 10 tweets
+[2025-10-20 16:52:42]   Sample: 'Graph showing tariffs as a percentage of total federal receipts from 1798 to 202...'
+[2025-10-20 16:52:42]     → MARKET_HOSTILE (80% confidence)
+[2025-10-20 16:52:43]   ✓ Checkpoint saved
+[2025-10-20 16:52:43] 
+[2025-10-20 16:52:44] Batch 60/257 (tweets 590 to 599)
+[2025-10-20 16:52:57]   ✓ Classified 10 tweets
+[2025-10-20 16:52:57]   Sample: 'The House and Senate are doing a SPECTACULAR job of working together as one unif...'
+[2025-10-20 16:52:57]     → MARKET_FRIENDLY (80% confidence)
+[2025-10-20 16:52:57]   ✓ Checkpoint saved
+[2025-10-20 16:52:57] 
+[2025-10-20 16:52:58] Batch 61/257 (tweets 600 to 609)
+[2025-10-20 16:53:10]   ✓ Classified 10 tweets
+[2025-10-20 16:53:10]   Sample: '“Trump says he'll work with Republicans in Congress to 'dramatically' cut taxes”...'
+[2025-10-20 16:53:10]     → MARKET_FRIENDLY (90% confidence)
+[2025-10-20 16:53:10]   ✓ Checkpoint saved
+[2025-10-20 16:53:10] 
+[2025-10-20 16:53:11] Batch 62/257 (tweets 610 to 619)
+[2025-10-20 16:53:24]   ✓ Classified 10 tweets
+[2025-10-20 16:53:24]   Sample: 'Thank you to Majority Leader John Thune, and the Republican Senate, for working ...'
+[2025-10-20 16:53:24]     → NEUTRAL (75% confidence)
+[2025-10-20 16:53:24]   ✓ Checkpoint saved
+[2025-10-20 16:53:24] 
+[2025-10-20 16:53:25] Batch 63/257 (tweets 620 to 629)
+[2025-10-20 16:53:36]   ✓ Classified 10 tweets
+[2025-10-20 16:53:36]   Sample: 'Official tweet from The White House featuring a quote from President...'
+[2025-10-20 16:53:36]     → NEUTRAL (90% confidence)
+[2025-10-20 16:53:36]   ✓ Checkpoint saved
+[2025-10-20 16:53:36] 
+[2025-10-20 16:53:37] Batch 64/257 (tweets 630 to 639)
+[2025-10-20 16:53:48]   ✓ Classified 10 tweets
+[2025-10-20 16:53:48]   Sample: 'The White House tweet features a quote by President...'
+[2025-10-20 16:53:48]     → NEUTRAL (90% confidence)
+[2025-10-20 16:53:48]   ✓ Checkpoint saved
+[2025-10-20 16:53:48] 
+[2025-10-20 16:53:49] Batch 65/257 (tweets 640 to 649)
+[2025-10-20 16:54:01]   ✓ Classified 10 tweets
+[2025-10-20 16:54:01]   Sample: 'Sharyl Attkisson is a terrific journalist. No games, she tells it like it is. He...'
+[2025-10-20 16:54:01]     → MARKET_FRIENDLY (75% confidence)
+[2025-10-20 16:54:01]   ✓ Checkpoint saved
+[2025-10-20 16:54:01] 
+[2025-10-20 16:54:02] Batch 66/257 (tweets 650 to 659)
+[2025-10-20 16:54:13]   ✓ Classified 10 tweets
+[2025-10-20 16:54:13]   Sample: 'RT @realDonaldTrumpELON IS DOING A GREAT JOB, BUT I WOULD LIKE TO SEE HIM GET MO...'
+[2025-10-20 16:54:13]     → NEUTRAL (80% confidence)
+[2025-10-20 16:54:13]   ✓ Checkpoint saved
+[2025-10-20 16:54:13] 
+[2025-10-20 16:54:14] Batch 67/257 (tweets 660 to 669)
+[2025-10-20 16:54:27]   ✓ Classified 10 tweets
+[2025-10-20 16:54:27]   Sample: 'Graphic showcasing investments in the U.S. under President Trump, featuring cont...'
+[2025-10-20 16:54:27]     → MARKET_FRIENDLY (90% confidence)
+[2025-10-20 16:54:27]   ✓ Checkpoint saved
+[2025-10-20 16:54:27] 
+[2025-10-20 16:54:28] Batch 68/257 (tweets 670 to 679)
+[2025-10-20 16:54:41]   ✓ Classified 10 tweets
+[2025-10-20 16:54:41]   Sample: 'Welcome to the White House. What an exciting day. Is everybody having a good tim...'
+[2025-10-20 16:54:41]     → NEUTRAL (90% confidence)
+[2025-10-20 16:54:41]   ✓ Checkpoint saved
+[2025-10-20 16:54:41] 
+[2025-10-20 16:54:42] Batch 69/257 (tweets 680 to 689)
+[2025-10-20 16:54:53]   ✓ Classified 10 tweets
+[2025-10-20 16:54:53]   Sample: 'Congratulations to Coach Tommy Tuberville and family on the birth of a very spec...'
+[2025-10-20 16:54:53]     → NEUTRAL (95% confidence)
+[2025-10-20 16:54:53]   ✓ Checkpoint saved
+[2025-10-20 16:54:53] 
+[2025-10-20 16:54:54] Batch 70/257 (tweets 690 to 699)
+[2025-10-20 16:55:06]   ✓ Classified 10 tweets
+[2025-10-20 16:55:06]   Sample: 'ALL CABINET MEMBERS ARE EXTREMELY HAPPY WITH ELON. The Media will see that at th...'
+[2025-10-20 16:55:06]     → NEUTRAL (80% confidence)
+[2025-10-20 16:55:06]   ✓ Checkpoint saved
+[2025-10-20 16:55:06] 
+[2025-10-20 16:55:07] Batch 71/257 (tweets 700 to 709)
+[2025-10-20 17:03:26] ================================================================================
+[2025-10-20 17:03:26] MARKET SENTIMENT CLASSIFIER - LOCAL MODEL (LM Studio)
+[2025-10-20 17:03:26] ================================================================================
+[2025-10-20 17:03:26] 
+[2025-10-20 17:03:26] Loading tweet data...
+[2025-10-20 17:03:26] ✓ Loaded 2562 tweets
+[2025-10-20 17:03:26]   Tweets with valid dates: 2537
+[2025-10-20 17:03:26] 
+[2025-10-20 17:03:26] Resume mode: Loading checkpoint...
+[2025-10-20 17:03:26] ✓ Resuming from index 700
+[2025-10-20 17:03:26]   Already processed: 700 tweets
+[2025-10-20 17:03:26] 
+[2025-10-20 17:03:26] Starting classification from index 700...
+[2025-10-20 17:03:26] Total tweets to process: 1862
+[2025-10-20 17:03:26] 
+[2025-10-20 17:03:26] Batch 1/187 (tweets 700 to 709)
+[2025-10-20 17:03:38]   ✓ Classified 10 tweets
+[2025-10-20 17:03:38]   Sample: 'I just wondered if there's any progress towards the second phase of the ceasefir...'
+[2025-10-20 17:03:38]     → MARKET_HOSTILE (75% confidence)
+[2025-10-20 17:03:38]   ✓ Checkpoint saved
+[2025-10-20 17:03:38] 
+[2025-10-20 17:03:38] Batch 2/187 (tweets 710 to 719)
+[2025-10-20 17:03:48]   ✓ Classified 10 tweets
+[2025-10-20 17:03:48]   Sample: 'I am pleased to announce that Hung Cao will be our next United States Under Secr...'
+[2025-10-20 17:03:48]     → NEUTRAL (90% confidence)
+[2025-10-20 17:03:48]   ✓ Checkpoint saved
+[2025-10-20 17:03:48] 
+[2025-10-20 17:03:48] Batch 3/187 (tweets 720 to 729)
+[2025-10-20 17:03:58]   ✓ Classified 10 tweets
+[2025-10-20 17:03:58]   Sample: 'RT @RepMTGI traveled all across the country with President Trump, and no matter ...'
+[2025-10-20 17:03:58]     → MARKET_FRIENDLY (95% confidence)
+[2025-10-20 17:03:58]   ✓ Checkpoint saved
+[2025-10-20 17:03:58] 
+[2025-10-20 17:03:58] Batch 4/187 (tweets 730 to 739)
+[2025-10-20 17:04:08]   ✓ Classified 10 tweets
+[2025-10-20 17:04:08]   Sample: 'RT: https://truthsocial.com/users/realDonaldTrump/statuses/114093526901586124And...'
+[2025-10-20 17:04:08]     → MARKET_FRIENDLY (75% confidence)
+[2025-10-20 17:04:08]   ✓ Checkpoint saved
+[2025-10-20 17:04:08] 
+[2025-10-20 17:04:08] Batch 5/187 (tweets 740 to 749)
+[2025-10-20 17:04:19]   ✓ Classified 10 tweets
+[2025-10-20 17:04:19]   Sample: 'Paid “troublemakers” are attending Republican Town Hall Meetings. It is all part...'
+[2025-10-20 17:04:19]     → NEUTRAL (90% confidence)
+[2025-10-20 17:04:19]   ✓ Checkpoint saved
+[2025-10-20 17:04:19] 
+[2025-10-20 17:04:19] Batch 6/187 (tweets 750 to 759)
+[2025-10-20 17:04:34]   ✓ Classified 10 tweets
+[2025-10-20 17:04:34]   Sample: 'CBS News Poll by YouGov, titled "Views of Trump's Speech Among Speech Watchers";...'
+[2025-10-20 17:04:34]     → NEUTRAL (90% confidence)
+[2025-10-20 17:04:34]   ✓ Checkpoint saved
+[2025-10-20 17:04:34] 
+[2025-10-20 17:04:34] Batch 7/187 (tweets 760 to 769)
+[2025-10-20 17:04:46] ================================================================================
+[2025-10-20 17:04:46] MARKET SENTIMENT CLASSIFIER - LOCAL MODEL (LM Studio)
+[2025-10-20 17:04:46] ================================================================================
+[2025-10-20 17:04:46] 
+[2025-10-20 17:04:46] Loading tweet data...
+[2025-10-20 17:04:46] ✓ Loaded 2562 tweets
+[2025-10-20 17:04:46]   Tweets with valid dates: 2537
+[2025-10-20 17:04:46] 
+[2025-10-20 17:04:46] Resume mode: Loading checkpoint...
+[2025-10-20 17:04:46] ✓ Resuming from index 760
+[2025-10-20 17:04:46]   Already processed: 760 tweets
+[2025-10-20 17:04:46] 
+[2025-10-20 17:04:46] Starting classification from index 760...
+[2025-10-20 17:04:46] Total tweets to process: 1802
+[2025-10-20 17:04:46] 
+[2025-10-20 17:04:46] Batch 1/181 (tweets 760 to 769)
+[2025-10-20 17:05:00]   ✓ Classified 10 tweets
+[2025-10-20 17:05:00]   Sample: 'Believe it or not, despite the terrible job he’s done for Canada, I think that J...'
+[2025-10-20 17:05:00]     → MARKET_HOSTILE (90% confidence)
+[2025-10-20 17:05:00]   ✓ Checkpoint saved
+[2025-10-20 17:05:00] 
+[2025-10-20 17:05:00] Batch 2/181 (tweets 770 to 779)
+[2025-10-20 17:05:13]   ✓ Classified 10 tweets
+[2025-10-20 17:05:13]   Sample: 'I am pleased to announce that Duke Buchan III will serve as the United States Am...'
+[2025-10-20 17:05:13]     → NEUTRAL (90% confidence)
+[2025-10-20 17:05:13]   ✓ Checkpoint saved
+[2025-10-20 17:05:13] 
+[2025-10-20 17:05:13] Batch 3/181 (tweets 780 to 789)
+[2025-10-20 17:05:27]   ✓ Classified 10 tweets
+[2025-10-20 17:05:27]   Sample: 'As I made clear during my Joint Address to Congress, the United States strongly ...'
+[2025-10-20 17:05:27]     → MARKET_FRIENDLY (75% confidence)
+[2025-10-20 17:05:27]   ✓ Checkpoint saved
+[2025-10-20 17:05:27] 
+[2025-10-20 17:05:27] Batch 4/181 (tweets 790 to 799)
+[2025-10-20 17:05:43]   ✓ Classified 10 tweets
+[2025-10-20 17:05:43]   Sample: 'To Republicans, Conservatives, and all great Americans, Elon Musk is “putting it...'
+[2025-10-20 17:05:43]     → MARKET_FRIENDLY (75% confidence)
+[2025-10-20 17:05:43]   ✓ Checkpoint saved
+[2025-10-20 17:05:43] 
+[2025-10-20 17:05:43] Batch 5/181 (tweets 800 to 809)
+[2025-10-20 17:05:55]   ✓ Classified 10 tweets
+[2025-10-20 17:05:55]   Sample: 'Big WIN for Republicans, and America, tonight. Congratulations to ALL!!! DJT...'
+[2025-10-20 17:05:55]     → NEUTRAL (90% confidence)
+[2025-10-20 17:05:55]   ✓ Checkpoint saved
+[2025-10-20 17:05:55] 
+[2025-10-20 17:05:55] Batch 6/181 (tweets 810 to 819)
+[2025-10-20 17:06:06]   ✓ Classified 10 tweets
+[2025-10-20 17:06:06]   Sample: 'Senator Mark Wayne Mullin was great on Fake News CNN. Made Caitlin Collins look ...'
+[2025-10-20 17:06:06]     → NEUTRAL (90% confidence)
+[2025-10-20 17:06:06]   ✓ Checkpoint saved
+[2025-10-20 17:06:06] 
+[2025-10-20 17:06:06] Batch 7/181 (tweets 820 to 829)

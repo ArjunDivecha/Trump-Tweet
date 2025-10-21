@@ -1,0 +1,236 @@
+================================================================================
+MARKET SENTIMENT RETURNS ANALYSIS
+Analyzing -1 day, 30-min, 1-day, 5-day, 10-day returns
+================================================================================
+
+[1/5] Loading market data...
+  ✓ SPY data loaded: 46986 5-minute bars
+    Date range: 2024-10-24 01:00:00 to 2025-10-17 16:55:00
+  ✓ SPY daily data: 246 trading days
+
+[2/5] Loading classified tweets...
+  ✓ Loaded 2562 classified tweets
+  ✓ Tweets with valid timestamps: 2537
+    Date range: 2025-01-01 10:48:00 to 2025-10-18 18:57:00
+
+  Market sentiment breakdown:
+    NEUTRAL: 2396
+    MARKET_FRIENDLY: 74
+    MARKET_HOSTILE: 67
+
+[3/5] Calculating returns for all time windows...
+    Processed: 500/2537
+    Processed: 1000/2537
+    Processed: 1500/2537
+    Processed: 2000/2537
+    Processed: 2500/2537
+  ✓ All tweets processed: 2537
+
+[4/5] Analyzing by market sentiment...
+
+================================================================================
+RESULTS BY SENTIMENT TYPE
+================================================================================
+
+MARKET_FRIENDLY
+--------------------------------------------------------------------------------
+Total events: 74
+
+  -1 Day (Before Tweet) (N=74):
+    Mean:          -0.268%
+    Median:         0.000%
+    Std Dev:        1.069%
+    % Negative:      43.2%
+    t-stat:        -2.157
+    p-value:       0.0343
+    ✓ SIGNIFICANT NEGATIVE
+
+  30 Minutes (N=50):
+    Mean:           0.099%
+    Median:         0.028%
+    Std Dev:        0.259%
+    % Negative:      38.0%
+    t-stat:         2.699
+    p-value:       0.0095
+    ✓ SIGNIFICANT POSITIVE
+
+  1 Day (N=74):
+    Mean:           0.248%
+    Median:         0.000%
+    Std Dev:        1.861%
+    % Negative:      21.6%
+    t-stat:         1.148
+    p-value:       0.2547
+    ✗ Not significant
+
+  5 Days (N=74):
+    Mean:           0.359%
+    Median:         0.234%
+    Std Dev:        2.409%
+    % Negative:      37.8%
+    t-stat:         1.283
+    p-value:       0.2034
+    ✗ Not significant
+
+  10 Days (N=74):
+    Mean:           0.614%
+    Median:         0.527%
+    Std Dev:        2.548%
+    % Negative:      41.9%
+    t-stat:         2.071
+    p-value:       0.0419
+    ✓ SIGNIFICANT POSITIVE
+
+
+MARKET_HOSTILE
+--------------------------------------------------------------------------------
+Total events: 67
+
+  -1 Day (Before Tweet) (N=67):
+    Mean:          -0.131%
+    Median:         0.000%
+    Std Dev:        1.804%
+    % Negative:      38.8%
+    t-stat:        -0.595
+    p-value:       0.5535
+    ✗ Not significant
+
+  30 Minutes (N=39):
+    Mean:           0.030%
+    Median:         0.036%
+    Std Dev:        0.383%
+    % Negative:      38.5%
+    t-stat:         0.495
+    p-value:       0.6238
+    ✗ Not significant
+
+  1 Day (N=66):
+    Mean:           0.572%
+    Median:         0.000%
+    Std Dev:        2.924%
+    % Negative:      36.4%
+    t-stat:         1.590
+    p-value:       0.1167
+    ✗ Not significant
+
+  5 Days (N=65):
+    Mean:           0.686%
+    Median:         0.413%
+    Std Dev:        2.992%
+    % Negative:      44.6%
+    t-stat:         1.849
+    p-value:       0.0691
+    ✗ Not significant
+
+  10 Days (N=63):
+    Mean:           0.481%
+    Median:         0.740%
+    Std Dev:        3.134%
+    % Negative:      31.7%
+    t-stat:         1.218
+    p-value:       0.2277
+    ✗ Not significant
+
+
+NEUTRAL
+--------------------------------------------------------------------------------
+Total events: 2396
+
+  -1 Day (Before Tweet) (N=2396):
+    Mean:           0.093%
+    Median:         0.000%
+    Std Dev:        1.093%
+    % Negative:      28.3%
+    t-stat:         4.163
+    p-value:       0.0000
+    ✓ SIGNIFICANT POSITIVE
+
+  30 Minutes (N=1059):
+    Mean:          -0.003%
+    Median:         0.002%
+    Std Dev:        0.187%
+    % Negative:      48.2%
+    t-stat:        -0.519
+    p-value:       0.6038
+    ✗ Not significant
+
+  1 Day (N=2380):
+    Mean:           0.111%
+    Median:         0.000%
+    Std Dev:        1.197%
+    % Negative:      31.0%
+    t-stat:         4.527
+    p-value:       0.0000
+    ✓ SIGNIFICANT POSITIVE
+
+  5 Days (N=2351):
+    Mean:           0.214%
+    Median:         0.490%
+    Std Dev:        2.106%
+    % Negative:      39.4%
+    t-stat:         4.918
+    p-value:       0.0000
+    ✓ SIGNIFICANT POSITIVE
+
+  10 Days (N=2327):
+    Mean:           0.364%
+    Median:         0.724%
+    Std Dev:        2.901%
+    % Negative:      34.7%
+    t-stat:         6.055
+    p-value:       0.0000
+    ✓ SIGNIFICANT POSITIVE
+
+
+================================================================================
+PAIRWISE COMPARISONS (HOSTILE vs FRIENDLY)
+================================================================================
+
+-1 Day (Before Tweet):
+  HOSTILE mean:     -0.131%
+  FRIENDLY mean:    -0.268%
+  Difference:        0.137%
+  t-statistic:       0.553
+  p-value:          0.5809
+  ✗ NO significant difference
+
+30 Minutes:
+  HOSTILE mean:      0.030%
+  FRIENDLY mean:     0.099%
+  Difference:       -0.068%
+  t-statistic:      -1.004
+  p-value:          0.3180
+  ✗ NO significant difference
+
+1 Day:
+  HOSTILE mean:      0.572%
+  FRIENDLY mean:     0.248%
+  Difference:        0.324%
+  t-statistic:       0.791
+  p-value:          0.4305
+  ✗ NO significant difference
+
+5 Days:
+  HOSTILE mean:      0.686%
+  FRIENDLY mean:     0.359%
+  Difference:        0.327%
+  t-statistic:       0.713
+  p-value:          0.4771
+  ✗ NO significant difference
+
+10 Days:
+  HOSTILE mean:      0.481%
+  FRIENDLY mean:     0.614%
+  Difference:       -0.132%
+  t-statistic:      -0.273
+  p-value:          0.7854
+  ✗ NO significant difference
+
+[5/5] Saving results...
+
+  ✓ outputs/market_sentiment_returns.xlsx
+  ✓ outputs/market_sentiment_summary.xlsx
+
+================================================================================
+ANALYSIS COMPLETE
+================================================================================

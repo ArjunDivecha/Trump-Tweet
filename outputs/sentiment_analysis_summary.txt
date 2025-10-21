@@ -1,0 +1,196 @@
+================================================================================
+SENTIMENT-BASED 30-MINUTE REACTION ANALYSIS - SUMMARY
+================================================================================
+
+Date: 2025-10-20
+Analysis: ALL tariff-related tweets (no filters)
+Time Window: 30 minutes after tweet
+Sample: 279 tariff tweets → 164 with market data
+
+================================================================================
+KEY FINDINGS
+================================================================================
+
+HYPOTHESIS: Aggressive tariff tweets cause immediate market drops
+RESULT: **NOT SUPPORTED**
+
+All three sentiment types show statistically insignificant reactions:
+
+┌─────────────────┬──────┬──────────────┬──────────────┬──────────────┐
+│ SENTIMENT       │  N   │ MEAN RETURN  │ % NEGATIVE   │ SIGNIFICANT? │
+├─────────────────┼──────┼──────────────┼──────────────┼──────────────┤
+│ Aggressive      │  39  │   +0.030%    │    38.5%     │      NO      │
+│ Defensive       │   9  │   -0.015%    │    33.3%     │      NO      │
+│ Informational   │  38  │   -0.079%    │    52.6%     │      NO*     │
+└─────────────────┴──────┴──────────────┴──────────────┴──────────────┘
+
+*Informational almost significant (p=0.0502, just above α=0.05 threshold)
+
+================================================================================
+DETAILED RESULTS
+================================================================================
+
+AGGRESSIVE TWEETS (N=39)
+------------------------
+• Mean 30-min return: +0.030%
+• 61.5% had POSITIVE reactions
+• Only 38.5% had negative reactions
+• Standard deviation: 0.383%
+• Range: -1.032% to +1.534%
+
+Statistical Test:
+  H0: Mean return = 0
+  t-statistic: 0.495
+  p-value: 0.624 (two-sided)
+  ✗ NOT significant (α=0.05)
+
+INTERPRETATION: Despite hostile language, Aggressive tweets do NOT cause
+market drops. If anything, they show a slight positive bias.
+
+---
+
+DEFENSIVE TWEETS (N=9)
+----------------------
+• Mean 30-min return: -0.015%
+• 66.7% had POSITIVE reactions
+• Only 33.3% had negative reactions
+• Standard deviation: 0.101%
+• Range: -0.192% to +0.127%
+
+Statistical Test:
+  H0: Mean return = 0
+  t-statistic: -0.455
+  p-value: 0.661 (two-sided)
+  ✗ NOT significant (α=0.05)
+
+INTERPRETATION: Defensive tweets (justifying tariffs) show nearly zero
+impact. Small sample size limits statistical power.
+
+---
+
+INFORMATIONAL TWEETS (N=38)
+---------------------------
+• Mean 30-min return: -0.079%
+• 52.6% had NEGATIVE reactions
+• Only 44.7% had positive reactions
+• Standard deviation: 0.289%
+• Range: -1.321% to +0.311%
+
+Statistical Test:
+  H0: Mean return = 0
+  t-statistic: -1.685
+  p-value: 0.101 (two-sided)
+  p-value: 0.0502 (one-sided, negative)
+  ✗ NOT significant (α=0.05) - but VERY CLOSE
+
+INTERPRETATION: Informational tweets show the MOST negative reactions,
+barely missing statistical significance. Possible that factual announcements
+(e.g., "tariffs now in effect") carry more market weight than rhetoric.
+
+================================================================================
+PAIRWISE COMPARISONS
+================================================================================
+
+None of the sentiment types differ significantly from each other:
+
+  Aggressive vs Defensive:      p = 0.727 (NO difference)
+  Aggressive vs Informational:  p = 0.162 (NO difference)
+  Defensive vs Informational:   p = 0.520 (NO difference)
+
+The 0.109% difference between Aggressive (+0.030%) and Informational
+(-0.079%) is the largest, but still not statistically significant.
+
+================================================================================
+EXAMPLE EVENTS
+================================================================================
+
+MOST NEGATIVE AGGRESSIVE TWEET:
+  Date: 2025-04-07 09:27:00
+  Return: -1.032%
+  Content: "Countries from all over the World are talking to us.
+            Tough but fair parameters are being set..."
+
+MOST POSITIVE AGGRESSIVE TWEET:
+  Date: 2025-04-07 06:49:00
+  Return: +1.534%
+  Content: "Oil prices are down, interest rates are down (the slow
+            moving Fed should cut rates!), food prices ar..."
+
+MOST NEGATIVE INFORMATIONAL TWEET:
+  Date: 2025-04-08 09:08:00
+  Return: -1.321%
+  Content: "I just had a great call with the Acting President of
+            South Korea. We talked about their tremendous a..."
+
+================================================================================
+CONCLUSIONS
+================================================================================
+
+1. **NO EVIDENCE of sentiment-driven market reactions**
+   - All three sentiment types show near-zero mean returns
+   - None are statistically significant
+   - Magnitude of reactions is tiny (all within ±0.08%)
+
+2. **Aggressive tweets do NOT cause market drops**
+   - Mean return is actually slightly positive (+0.030%)
+   - 61.5% of Aggressive tweets had positive 30-min reactions
+   - This contradicts the common narrative
+
+3. **Informational tweets show weakest reactions**
+   - Mean return of -0.079% (most negative)
+   - 52.6% had negative reactions
+   - Barely misses significance (p=0.0502)
+   - Suggests factual announcements may have more impact than rhetoric
+
+4. **Individual variation is HIGH**
+   - Returns range from -1.321% to +1.534%
+   - Standard deviations (0.1-0.4%) much larger than mean effects
+   - Individual tweet content matters more than sentiment category
+
+5. **Sample size matters**
+   - Aggressive: 39 events (good statistical power)
+   - Informational: 38 events (good statistical power)
+   - Defensive: 9 events (limited power, results less reliable)
+
+================================================================================
+IMPLICATIONS FOR TRADING STRATEGY
+================================================================================
+
+❌ DO NOT trade based on tariff tweet sentiment alone:
+   - Effects are too small (< 0.1% on average)
+   - High variance (±0.3-0.4%) drowns out any signal
+   - No statistically significant patterns
+
+❌ "Buy the dip after Aggressive tweets" strategy is NOT viable:
+   - Aggressive tweets don't cause dips (mean = +0.030%)
+   - Only 38.5% are negative
+   - No statistical edge
+
+⚠️  Informational tweets may warrant attention:
+   - Show most negative bias (-0.079%)
+   - Nearly significant (p=0.0502)
+   - Could become tradeable with larger sample or refinement
+
+✅  Better approach:
+   - Focus on individual tweet content, not sentiment labels
+   - Look for specific policy announcements (effective dates, percentages)
+   - Combine with other market signals
+   - Use longer time horizons (days/weeks, not 30 minutes)
+
+================================================================================
+TECHNICAL NOTES
+================================================================================
+
+Data Source: tariff_classified_tweets_full_v5.json (corrected timestamps)
+Market Data: SPY 5-minute bars
+Baseline: 30 minutes pre-event (for comparison, not used in analysis)
+Calculation: Cumulative return from event time to T+30 minutes
+Exclusions: Events outside market hours or with missing data
+Statistical Tests: One-sample t-tests, two-sample t-tests (α=0.05)
+
+Files Generated:
+  - outputs/sentiment_30min_results.xlsx (detailed event-by-event)
+  - outputs/sentiment_30min_summary.xlsx (aggregate statistics)
+  - outputs/sentiment_analysis_summary.txt (this file)
+
+================================================================================

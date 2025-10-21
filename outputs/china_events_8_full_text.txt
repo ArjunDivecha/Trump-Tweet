@@ -1,0 +1,118 @@
+================================================================================
+8 CHINA TARIFF EVENTS (AGGRESSIVE, POST-APRIL 3, 2025)
+Event Study Analysis - Full Tweet Text
+Data Source: tariff_classified_tweets_full_v5.json (CORRECTED TIMESTAMPS)
+================================================================================
+
+EVENT #1
+--------------------------------------------------------------------------------
+Date/Time: 2025-04-07T11:14:00
+Action Type: announcing
+Sentiment: Aggressive
+Confidence: 100%
+Countries: ['China']
+Tariff %: 34%,50%
+
+FULL CONTENT:
+Yesterday, China issued Retaliatory Tariffs of 34%, on top of their already record setting Tariffs, Non-Monetary Tariffs, Illegal Subsidization of companies, and massive long term Currency Manipulation, despite my warning that any country that Retaliates against the U.S. by issuing additional Tariffs, above and beyond their already existing long term Tariff abuse of our Nation, will be immediately met with new and substantially higher Tariffs, over and above those initially set. Therefore, if China does not withdraw its 34% increase above their already long term trading abuses by tomorrow, April 8th, 2025, the United States will impose ADDITIONAL Tariffs on China of 50%, effective April 9th. Additionally, all talks with China concerning their requested meetings with us will be terminated! Negotiations with other countries, which have also requested meetings, will begin taking place immediately. Thank you for your attention to this matter!
+
+================================================================================
+
+EVENT #2
+--------------------------------------------------------------------------------
+Date/Time: 2025-04-09T13:18:00
+Action Type: announcing
+Sentiment: Aggressive
+Confidence: 100%
+Countries: ['China']
+Tariff %: 125%,10%
+
+FULL CONTENT:
+Based on the lack of respect that China has shown to the World’s Markets, I am hereby raising the Tariff charged to China by the United States of America to 125%, effective immediately. At some point, hopefully in the near future, China will realize that the days of ripping off the U.S.A., and other Countries, is no longer sustainable or acceptable. Conversely, and based on the fact that more than 75 Countries have called Representatives of the United States, including the Departments of Commerce, Treasury, and the USTR, to negotiate a solution to the subjects being discussed relative to Trade, Trade Barriers, Tariffs, Currency Manipulation, and Non Monetary Tariffs, and that these Countries have not, at my strong suggestion, retaliated in any way, shape, or form against the United States, I have authorized a 90 day PAUSE, and a substantially lowered Reciprocal Tariff during this period, of 10%, also effective immediately. Thank you for your attention to this matter!
+
+================================================================================
+
+EVENT #3
+--------------------------------------------------------------------------------
+Date/Time: 2025-04-24T10:43:00
+Action Type: threatening
+Sentiment: Aggressive
+Confidence: 85%
+Countries: ['China', 'Mexico', 'Canada']
+Tariff %: 
+
+FULL CONTENT:
+Boeing should default China for not taking the beautifully finished planes that China committed to purchase. This is just a small example of what China has done to the USA, for years… And, by the way, Fentanyl continues to pour into our Country from China, through Mexico and Canada, killing hundreds of thousands of our people, and it better stop, NOW!
+
+================================================================================
+
+EVENT #4
+--------------------------------------------------------------------------------
+Date/Time: 2025-09-13T07:15:00
+Action Type: threatening
+Sentiment: Aggressive
+Confidence: 95%
+Countries: ['Russia', 'China', 'NATO nations']
+Tariff %: 50% to 100%
+
+FULL CONTENT:
+A LETTER SENT BY PRESIDENT DONALD J. TRUMP TO ALL NATO NATIONS AND, THE WORLD: “I am ready to do major Sanctions on Russia when all NATO Nations have agreed, and started, to do the same thing, and when all NATO Nations STOP BUYING OIL FROM RUSSIA. As you know, NATO’S commitment to WIN has been far less than 100%, and the purchase of Russian Oil, by some, has been shocking! It greatly weakens your negotiating position, and bargaining power, over Russia. Anyway, I am ready to “go” when you are. Just say when? I believe that this, plus NATO, as a group, placing 50% to 100% TARIFFS ON CHINA, to be fully withdrawn after the WAR with Russia and Ukraine is ended, will also be of great help in ENDING this deadly, but RIDICULOUS, WAR. China has a strong control, and even grip, over Russia, and these powerful Tariffs will break that grip. This is not TRUMP’S WAR (it would never have started if I was President!), it is Biden’s and Zelenskyy’s WAR. I am only here to help stop it, and save thousands of Russian and Ukrainian lives (7,118 lives lost last week, alone. CRAZY!). If NATO does as I say, the WAR will end quickly, and all of those lives will be saved! If not, you are just wasting my time, and the time, energy, and money of the United States. Thank you for your attention to this matter! DONALD J. TRUMP, PRESIDENT OF THE UNITED STATES OF AMERICA.”
+
+================================================================================
+
+EVENT #5
+--------------------------------------------------------------------------------
+Date/Time: 2025-09-29T09:04:00
+Action Type: announcing
+Sentiment: Aggressive
+Confidence: 95%
+Countries: ['China', 'North Carolina']
+Tariff %: substantial
+
+FULL CONTENT:
+In order to make North Carolina, which has completely lost its furniture business to China, and other Countries, GREAT again, I will be imposing substantial Tariffs on any Country that does not make its furniture in the United States. Details to follow!!! President DJT
+
+================================================================================
+
+EVENT #6
+--------------------------------------------------------------------------------
+Date/Time: 2025-10-10T10:57:00
+Action Type: threatening
+Sentiment: Aggressive
+Confidence: 95%
+Countries: ['China']
+Tariff %: 100%
+
+FULL CONTENT:
+Some very strange things are happening in China! They are becoming very hostile, and sending letters to Countries throughout the World, that they want to impose Export Controls on each and every element of production having to do with Rare Earths, and virtually anything else they can think of, even if it’s not manufactured in China. Nobody has ever seen anything like this but, essentially, it would “clog” the Markets, and make life difficult for virtually every Country in the World, especially for China. We have been contacted by other Countries who are extremely angry at this great Trade hostility, which came out of nowhere. Our relationship with China over the past six months has been a very good one, thereby making this move on Trade an even more surprising one. I have always felt that they’ve been lying in wait, and now, as usual, I have been proven right! There is no way that China should be allowed to hold the World “captive,” but that seems to have been their plan for quite some time, starting with the “Magnets” and, other Elements that they have quietly amassed into somewhat of a Monopoly position, a rather sinister and hostile move, to say the least. But the U.S. has Monopoly positions also, much stronger and more far reaching than China’s. I have just not chosen to use them, there was never a reason for me to do so — UNTIL NOW! The letter they sent is many pages long, and details, with great specificity, each and every Element that they want to withhold from other Nations. Things that were routine are no longer routine at all. I have not spoken to President Xi because there was no reason to do so. This was a real surprise, not only to me, but to all the Leaders of the Free World. I was to meet President Xi in two weeks, at APEC, in South Korea, but now there seems to be no reason to do so. The Chinese letters were especially inappropriate in that this was the Day that, after three thousand years of bedlam and fighting, there is PEACE IN THE MIDDLE EAST. I wonder if that timing was coincidental? Dependent on what China says about the hostile “order” that they have just put out, I will be forced, as President of the United States of America, to financially counter their move. For every Element that they have been able to monopolize, we have two. I never thought it would come to this but perhaps, as with all things, the time has come. Ultimately, though potentially painful, it will be a very good thing, in the end, for the U.S.A. One of the Policies that we are calculating at this moment is a massive increase of Tariffs on Chinese products coming into the United States of America. There are many other countermeasures that are, likewise, under serious consideration. Thank you for your attention to this matter! DONALD J. TRUMP, PRESIDENT OF THE UNITED STATES OF AMERICA
+
+================================================================================
+
+EVENT #7
+--------------------------------------------------------------------------------
+Date/Time: 2025-10-10T16:50:00
+Action Type: announcing
+Sentiment: Aggressive
+Confidence: 100%
+Countries: ['China']
+Tariff %: 100%
+
+FULL CONTENT:
+It has just been learned that China has taken an extraordinarily aggressive position on Trade in sending an extremely hostile letter to the World, stating that they were going to, effective November 1st, 2025, impose large scale Export Controls on virtually every product they make, and some not even made by them. This affects ALL Countries, without exception, and was obviously a plan devised by them years ago. It is absolutely unheard of in International Trade, and a moral disgrace in dealing with other Nations.Based on the fact that China has taken this unprecedented position, and speaking only for the U.S.A., and not other Nations who were similarly threatened, starting November 1st, 2025 (or sooner, depending on any further actions or changes taken by China), the United States of America will impose a Tariff of 100% on China, over and above any Tariff that they are currently paying. Also on November 1st, we will impose Export Controls on any and all critical software.It is impossible to believe that China would have taken such an action, but they have, and the rest is History. Thank you for your attention to this matter!DONALD J. TRUMPPRESIDENT OF THE UNITED STATES OF AMERICA
+
+================================================================================
+
+EVENT #8
+--------------------------------------------------------------------------------
+Date/Time: 2025-10-14T15:37:00
+Action Type: threatening
+Sentiment: Aggressive
+Confidence: 95%
+Countries: ['China']
+Tariff %: 
+
+FULL CONTENT:
+I believe that China purposefully not buying our Soybeans, and causing difficulty for our Soybean Farmers, is an Economically Hostile Act. We are considering terminating business with China having to do with Cooking Oil, and other elements of Trade, as retribution. As an example, we can easily produce Cooking Oil ourselves, we don’t need to purchase it from China.
+
+================================================================================
+

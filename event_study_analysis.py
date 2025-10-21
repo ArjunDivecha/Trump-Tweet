@@ -6,7 +6,7 @@ SCRIPT NAME: event_study_analysis.py
 INPUT FILES:
 - SPY_5min_history.xlsx: S&P 500 ETF 5-minute price data (Date, Time, Open, High, Low, Close, Volume)
 - Data Collection and Cleaning/VXX_5min_history.xlsx: Volatility ETF 5-minute price data
-- Data Collection and Cleaning/tariff_classified_tweets_full.json: AI-classified Trump tweets with tariff flags
+- Data Collection and Cleaning/tariff_classified_tweets_full_v5.json: AI-classified Trump tweets with tariff flags (CORRECTED TIMESTAMPS)
 
 OUTPUT FILES:
 - outputs/event_study_results.xlsx: Main results with event-level and aggregated metrics
@@ -70,7 +70,8 @@ warnings.filterwarnings('ignore')
 
 print("="*80)
 print("TRUMP TARIFF TWEET EVENT STUDY")
-print("Testing: 'Fall then Recover' Hypothesis")
+print("CHINA-SPECIFIC + announcing/threatening")
+print("Testing: 'Fall then Recover' Hypothesis (with CORRECTED TIMESTAMPS v5)")
 print("="*80)
 print()
 
@@ -139,31 +140,80 @@ print(f"  ✓ VXX data loaded: {len(vxx_data)} rows")
 print(f"    Date range: {vxx_data.index.min()} to {vxx_data.index.max()}")
 print()
 
-print("[2/10] Loading tariff tweet data...")
+print("[2/10] Loading tariff tweet data from v5 JSON (corrected timestamps)...")
 
-# Load tweets
+# Load tweets from v5 JSON
 try:
-    with open('Data Collection and Cleaning/tariff_classified_tweets_full.json', 'r') as f:
-        all_tweets = json.load(f)
-    print(f"  ✓ Total tweets loaded: {len(all_tweets)}")
+    with open('Data Collection and Cleaning/tariff_classified_tweets_full_v5.json', 'r') as f:
+        tweets_data = json.load(f)
+    tweets_df = pd.DataFrame(tweets_data)
+    print(f"  ✓ Total tweets loaded: {len(tweets_df)}")
 except Exception as e:
     print(f"  ERROR: Could not load tweet data: {e}")
     exit(1)
 
 # Filter to tariff-related tweets
-tariff_tweets = [t for t in all_tweets if t.get('is_tariff_related')]
+tariff_tweets = tweets_df[tweets_df['is_tariff_related'] == True].copy()
 print(f"  ✓ Tariff-related tweets: {len(tariff_tweets)}")
+
+# Filter by tariff_action_type (announcing or threatening only)
+print(f"\n  Tariff action type breakdown (all tariff tweets):")
+for action_type, count in tariff_tweets['tariff_action_type'].value_counts().items():
+    print(f"    {action_type}: {count}")
+
+tariff_tweets = tariff_tweets[
+    tariff_tweets['tariff_action_type'].isin(['announcing', 'threatening'])
+].copy()
+print(f"\n  ✓ Filtered to announcing or threatening: {len(tariff_tweets)} events")
+
+# Filter by countries_mentioned containing 'China'
+def contains_china(countries):
+    """Check if China is in the countries list"""
+    # Handle None
+    if countries is None:
+        return False
+    # Handle list (from JSON) - this is the primary case
+    if isinstance(countries, list):
+        return 'China' in countries
+    # Handle empty string
+    if isinstance(countries, str):
+        if countries.strip() == '':
+            return False
+        # If it's a string representation of a list, try to parse it
+        try:
+            import ast
+            countries_list = ast.literal_eval(countries)
+            return 'China' in countries_list
+        except:
+            return False
+    # Handle other types (floats for NaN, etc.)
+    try:
+        if pd.isna(countries):
+            return False
+    except:
+        pass
+    return False
+
+tariff_tweets['has_china'] = tariff_tweets['countries_mentioned'].apply(contains_china)
+print(f"\n  Countries breakdown (announcing/threatening):")
+print(f"    With China: {tariff_tweets['has_china'].sum()}")
+print(f"    Without China: {(~tariff_tweets['has_china']).sum()}")
+
+tariff_tweets = tariff_tweets[tariff_tweets['has_china']].copy()
+print(f"\n  ✓ Filtered to China-specific events: {len(tariff_tweets)} events")
 
 # Parse tweet timestamps
 tariff_events = []
-for tweet in tariff_tweets:
+for idx, tweet in tariff_tweets.iterrows():
     try:
         # Try to parse created_at timestamp
-        if tweet.get('created_at'):
+        if pd.notna(tweet.get('created_at')) and tweet.get('created_at'):
             ts = pd.to_datetime(tweet['created_at'])
-        elif tweet.get('timestamp'):
+        elif pd.notna(tweet.get('timestamp')) and tweet.get('timestamp'):
             # Parse from various formats
             ts = pd.to_datetime(tweet['timestamp'])
+        elif pd.notna(tweet.get('date')) and tweet.get('date'):
+            ts = pd.to_datetime(tweet['date'])
         else:
             continue
 
@@ -176,6 +226,8 @@ for tweet in tariff_tweets:
             'tariff_type': tweet.get('tariff_type', 'General'),
             'countries_mentioned': tweet.get('countries_mentioned', []),
             'tariff_percentage': tweet.get('tariff_percentage', ''),
+            'tariff_action_type': tweet.get('tariff_action_type', 'no_mention'),
+            'tariff_effective_date': tweet.get('tariff_effective_date', ''),
         })
     except Exception as e:
         # Skip tweets with unparseable timestamps
@@ -189,6 +241,9 @@ print(f"    Date range: {tariff_df['datetime'].min()} to {tariff_df['datetime'].
 print(f"    Sentiment breakdown:")
 for sentiment, count in tariff_df['sentiment'].value_counts().items():
     print(f"      {sentiment}: {count}")
+print(f"    Tariff action type breakdown:")
+for action_type, count in tariff_df['tariff_action_type'].value_counts().items():
+    print(f"      {action_type}: {count}")
 print()
 
 # ==================== CONTROL GROUP GENERATION ====================
@@ -501,32 +556,213 @@ control_results_df = pd.DataFrame(control_returns)
 print(f"  ✓ Control events processed: {len(control_results_df)}")
 print()
 
-# ==================== PLACEHOLDER FOR REMAINING SECTIONS ====================
+# ==================== FILTER TO AGGRESSIVE SENTIMENT + POST APRIL 3 ====================
 
-print("[6/10] Running directional hypothesis tests...")
-print("  [TO BE IMPLEMENTED]")
+print("[6/10] Filtering to Aggressive sentiment events after April 3, 2025...")
 print()
 
-print("[7/10] Simulating trading strategies...")
-print("  [TO BE IMPLEMENTED]")
+# Filter to Aggressive only AND after April 3, 2025
+tariff_all = tariff_results_df.copy()
+control_all = control_results_df.copy()
+
+# Convert datetime to comparable format
+cutoff_date = pd.to_datetime('2025-04-03')
+tariff_results_df['datetime_parsed'] = pd.to_datetime(tariff_results_df['datetime'])
+control_results_df['datetime_parsed'] = pd.to_datetime(control_results_df['datetime'])
+
+print(f"  Original tariff events: {len(tariff_all)}")
+print(f"  Date range: {tariff_all['datetime'].min()} to {tariff_all['datetime'].max()}")
 print()
 
-print("[8/10] Performing statistical tests...")
-print("  [TO BE IMPLEMENTED]")
+# Apply filters - TARIFF EVENTS
+tariff_results_df = tariff_results_df[
+    (tariff_results_df['sentiment'] == 'Aggressive') &
+    (tariff_results_df['datetime_parsed'] > cutoff_date)
+].copy()
+
+print(f"  Aggressive events only: {(tariff_all['sentiment'] == 'Aggressive').sum()}")
+print(f"  Aggressive + after April 3: {len(tariff_results_df)}")
+print(f"  New tariff date range: {tariff_results_df['datetime'].min()} to {tariff_results_df['datetime'].max()}")
 print()
 
-print("[9/10] Generating visualizations...")
-print("  [TO BE IMPLEMENTED]")
+# Apply filters - CONTROL EVENTS (same date filter!)
+print(f"  Original control events: {len(control_all)}")
+control_results_df = control_results_df[
+    control_results_df['datetime_parsed'] > cutoff_date
+].copy()
+print(f"  Control after April 3: {len(control_results_df)}")
+print(f"  New control date range: {control_results_df['datetime'].min()} to {control_results_df['datetime'].max()}")
 print()
 
-print("[10/10] Writing summary report...")
-print("  [TO BE IMPLEMENTED]")
+print(f"  Sentiment breakdown in original tariff events:")
+for sentiment, count in tariff_all['sentiment'].value_counts().items():
+    print(f"    {sentiment}: {count}")
+print()
+
+# ==================== VALIDATION: SAMPLE EVENTS ====================
+
+print("[7/10] Validating results - China-Specific Aggressive Events Post-April 3")
+print()
+
+# Show sample of tariff events with returns
+print("="*80)
+print("SAMPLE EVENTS - CHINA TARIFFS - AGGRESSIVE POST-APRIL 3 - RETURN ANALYSIS")
+print("="*80)
+print()
+
+# Get a few diverse events
+sample_indices = [0, len(tariff_results_df)//4, len(tariff_results_df)//2, len(tariff_results_df)-1]
+
+for idx in sample_indices:
+    if idx < len(tariff_results_df):
+        event = tariff_results_df.iloc[idx]
+
+        print(f"Event #{idx+1}: {event['datetime']}")
+        print(f"  Content: {event.get('content', '')[:100]}...")
+        print(f"  Sentiment: {event.get('sentiment', 'N/A')}")
+        print(f"  Confidence: {event.get('confidence', 'N/A')}%")
+        print()
+        print(f"  INTRADAY RETURNS:")
+        print(f"    30-min AR:  {event.get('ar_30min', np.nan)*100:.3f}%" if not pd.isna(event.get('ar_30min')) else "    30-min AR:  N/A")
+        print(f"    1-hour AR:  {event.get('ar_1hr', np.nan)*100:.3f}%" if not pd.isna(event.get('ar_1hr')) else "    1-hour AR:  N/A")
+        print(f"    2-hour AR:  {event.get('ar_2hr', np.nan)*100:.3f}%" if not pd.isna(event.get('ar_2hr')) else "    2-hour AR:  N/A")
+        print()
+        print(f"  DAILY CUMULATIVE RETURNS:")
+        print(f"    T+0 (same day):    {event.get('car_t0', np.nan)*100:.3f}%")
+        print(f"    T+0 to T+1:        {event.get('car_t0_t1', np.nan)*100:.3f}%")
+        print(f"    T+2 to T+5:        {event.get('car_t2_t5', np.nan)*100:.3f}%")
+        print(f"    T+6 to T+10:       {event.get('car_t6_t10', np.nan)*100:.3f}%")
+        print(f"    T+0 to T+10 (NET): {event.get('car_t0_t10', np.nan)*100:.3f}%")
+        print()
+        if not pd.isna(event.get('vxx_t0_return')):
+            print(f"  VXX VOLATILITY:")
+            print(f"    T+0 return:        {event.get('vxx_t0_return', np.nan)*100:.3f}%")
+            if not pd.isna(event.get('vxx_t5_return')):
+                print(f"    T+5 return:        {event.get('vxx_t5_return', np.nan)*100:.3f}%")
+        print()
+        print("-"*80)
+        print()
+
+# Summary statistics across all events
+print("="*80)
+print("AGGREGATE STATISTICS - CHINA TARIFFS - AGGRESSIVE POST-APRIL 3 (N={})".format(len(tariff_results_df)))
+print("="*80)
+print()
+
+# Calculate mean returns
+print("MEAN RETURNS:")
+print(f"  30-min AR:         {tariff_results_df['ar_30min'].mean()*100:.3f}%")
+print(f"  1-hour AR:         {tariff_results_df['ar_1hr'].mean()*100:.3f}%")
+print(f"  2-hour AR:         {tariff_results_df['ar_2hr'].mean()*100:.3f}%")
+print(f"  CAR[0] (same day): {tariff_results_df['car_t0'].mean()*100:.3f}%")
+print(f"  CAR[0,1]:          {tariff_results_df['car_t0_t1'].mean()*100:.3f}%")
+print(f"  CAR[2,5]:          {tariff_results_df['car_t2_t5'].mean()*100:.3f}%")
+print(f"  CAR[6,10]:         {tariff_results_df['car_t6_t10'].mean()*100:.3f}%")
+print(f"  CAR[0,10] (NET):   {tariff_results_df['car_t0_t10'].mean()*100:.3f}%")
+print()
+
+# Directional tests
+print("DIRECTIONAL PATTERN:")
+print(f"  % negative T+0:    {(tariff_results_df['car_t0'] < 0).sum() / len(tariff_results_df) * 100:.1f}%")
+print(f"  % negative T+0,1:  {(tariff_results_df['car_t0_t1'] < 0).sum() / len(tariff_results_df) * 100:.1f}%")
+print(f"  % positive T+2,5:  {(tariff_results_df['car_t2_t5'] > 0).sum() / len(tariff_results_df) * 100:.1f}%")
+print(f"  % V-pattern:       {((tariff_results_df['car_t0_t1'] < 0) & (tariff_results_df['car_t2_t5'] > 0)).sum() / len(tariff_results_df) * 100:.1f}%")
+print()
+
+# VXX
+vxx_valid = tariff_results_df['vxx_t0_return'].notna()
+if vxx_valid.sum() > 0:
+    print("VXX VOLATILITY:")
+    print(f"  Mean T+0 return:   {tariff_results_df.loc[vxx_valid, 'vxx_t0_return'].mean()*100:.3f}%")
+    print(f"  % positive T+0:    {(tariff_results_df.loc[vxx_valid, 'vxx_t0_return'] > 0).sum() / vxx_valid.sum() * 100:.1f}%")
+    print()
+
+print("="*80)
+print("AGGREGATE STATISTICS - CONTROL EVENTS (N={})".format(len(control_results_df)))
+print("="*80)
+print()
+
+print("MEAN RETURNS:")
+print(f"  30-min AR:         {control_results_df['ar_30min'].mean()*100:.3f}%")
+print(f"  1-hour AR:         {control_results_df['ar_1hr'].mean()*100:.3f}%")
+print(f"  2-hour AR:         {control_results_df['ar_2hr'].mean()*100:.3f}%")
+print(f"  CAR[0] (same day): {control_results_df['car_t0'].mean()*100:.3f}%")
+print(f"  CAR[0,1]:          {control_results_df['car_t0_t1'].mean()*100:.3f}%")
+print(f"  CAR[2,5]:          {control_results_df['car_t2_t5'].mean()*100:.3f}%")
+print(f"  CAR[6,10]:         {control_results_df['car_t6_t10'].mean()*100:.3f}%")
+print(f"  CAR[0,10] (NET):   {control_results_df['car_t0_t10'].mean()*100:.3f}%")
+print()
+
+print("DIRECTIONAL PATTERN:")
+print(f"  % negative T+0:    {(control_results_df['car_t0'] < 0).sum() / len(control_results_df) * 100:.1f}%")
+print(f"  % negative T+0,1:  {(control_results_df['car_t0_t1'] < 0).sum() / len(control_results_df) * 100:.1f}%")
+print(f"  % positive T+2,5:  {(control_results_df['car_t2_t5'] > 0).sum() / len(control_results_df) * 100:.1f}%")
 print()
 
 print("="*80)
-print("ANALYSIS COMPLETE")
+print("INITIAL HYPOTHESIS TEST RESULTS")
 print("="*80)
 print()
-print(f"Outputs saved to: outputs/")
-print(f"  - Event-level results: {len(tariff_results_df)} tariff, {len(control_results_df)} control")
+
+# Simple t-tests
+from scipy.stats import ttest_1samp, ttest_ind
+
+# Test 1: Does SPY fall on T+0?
+t_stat, p_val = ttest_1samp(tariff_results_df['car_t0'].dropna(), 0, alternative='less')
+print(f"Test 1: Does SPY fall same-day (CAR[0] < 0)?")
+print(f"  Mean CAR[0]: {tariff_results_df['car_t0'].mean()*100:.3f}%")
+print(f"  t-statistic: {t_stat:.3f}")
+print(f"  p-value: {p_val:.4f}")
+print(f"  Result: {'✓ SUPPORTED' if p_val < 0.05 else '✗ NOT SUPPORTED'} (α=0.05)")
+print()
+
+# Test 2: Does SPY fall through T+1?
+t_stat, p_val = ttest_1samp(tariff_results_df['car_t0_t1'].dropna(), 0, alternative='less')
+print(f"Test 2: Does decline persist through T+1 (CAR[0,1] < 0)?")
+print(f"  Mean CAR[0,1]: {tariff_results_df['car_t0_t1'].mean()*100:.3f}%")
+print(f"  t-statistic: {t_stat:.3f}")
+print(f"  p-value: {p_val:.4f}")
+print(f"  Result: {'✓ SUPPORTED' if p_val < 0.05 else '✗ NOT SUPPORTED'} (α=0.05)")
+print()
+
+# Test 3: Does SPY recover T+2 to T+5?
+t_stat, p_val = ttest_1samp(tariff_results_df['car_t2_t5'].dropna(), 0, alternative='greater')
+print(f"Test 3: Does market recover T+2 to T+5 (CAR[2,5] > 0)?")
+print(f"  Mean CAR[2,5]: {tariff_results_df['car_t2_t5'].mean()*100:.3f}%")
+print(f"  t-statistic: {t_stat:.3f}")
+print(f"  p-value: {p_val:.4f}")
+print(f"  Result: {'✓ SUPPORTED' if p_val < 0.05 else '✗ NOT SUPPORTED'} (α=0.05)")
+print()
+
+# Test 4: VXX spike
+vxx_data_test = tariff_results_df['vxx_t0_return'].dropna()
+if len(vxx_data_test) > 0:
+    t_stat, p_val = ttest_1samp(vxx_data_test, 0, alternative='greater')
+    print(f"Test 4: Does VXX spike on T+0 (VXX[0] > 0)?")
+    print(f"  Mean VXX[0]: {vxx_data_test.mean()*100:.3f}%")
+    print(f"  t-statistic: {t_stat:.3f}")
+    print(f"  p-value: {p_val:.4f}")
+    print(f"  Result: {'✓ SUPPORTED' if p_val < 0.05 else '✗ NOT SUPPORTED'} (α=0.05)")
+    print()
+
+# Test 5: Tariff vs Control
+t_stat, p_val = ttest_ind(tariff_results_df['car_t0'].dropna(), control_results_df['car_t0'].dropna(), alternative='less')
+print(f"Test 5: Do tariff events cause larger drops than control (Tariff CAR[0] < Control CAR[0])?")
+print(f"  Tariff mean:  {tariff_results_df['car_t0'].mean()*100:.3f}%")
+print(f"  Control mean: {control_results_df['car_t0'].mean()*100:.3f}%")
+print(f"  Difference:   {(tariff_results_df['car_t0'].mean() - control_results_df['car_t0'].mean())*100:.3f}%")
+print(f"  t-statistic: {t_stat:.3f}")
+print(f"  p-value: {p_val:.4f}")
+print(f"  Result: {'✓ SUPPORTED' if p_val < 0.05 else '✗ NOT SUPPORTED'} (α=0.05)")
+print()
+
+print()
+print("="*80)
+print("VALIDATION COMPLETE")
+print("="*80)
+print()
+print("Next steps:")
+print("  - Review sample events and aggregate statistics above")
+print("  - Verify the 'fall then recover' pattern is visible in the data")
+print("  - If results look correct, proceed with full implementation")
 print()
