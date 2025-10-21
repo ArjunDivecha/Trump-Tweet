@@ -5,8 +5,8 @@ SCRIPT NAME: event_study_analysis.py
 
 INPUT FILES:
 - SPY_5min_history.xlsx: S&P 500 ETF 5-minute price data (Date, Time, Open, High, Low, Close, Volume)
-- Data Collection and Cleaning/VXX_5min_history.xlsx: Volatility ETF 5-minute price data
-- Data Collection and Cleaning/tariff_classified_tweets_full_v5.json: AI-classified Trump tweets with tariff flags (CORRECTED TIMESTAMPS)
+- Dsified_tweets_full.json: AI-classified Trump tweets with tariff flagsata Collection and Cleaning/VXX_5min_history.xlsx: Volatility ETF 5-minute price data
+- Data Collection and Cleaning/tariff_clas
 
 OUTPUT FILES:
 - outputs/event_study_results.xlsx: Main results with event-level and aggregated metrics
@@ -70,8 +70,8 @@ warnings.filterwarnings('ignore')
 
 print("="*80)
 print("TRUMP TARIFF TWEET EVENT STUDY")
-print("CHINA-SPECIFIC + announcing/threatening")
-print("Testing: 'Fall then Recover' Hypothesis (with CORRECTED TIMESTAMPS v5)")
+print("CHINA-SPECIFIC + ANNOUNCING/THREATENING + AGGRESSIVE + POST-APRIL 3, 2025")
+print("Testing: 'Fall then Recover' Hypothesis")
 print("="*80)
 print()
 
@@ -140,13 +140,11 @@ print(f"  ✓ VXX data loaded: {len(vxx_data)} rows")
 print(f"    Date range: {vxx_data.index.min()} to {vxx_data.index.max()}")
 print()
 
-print("[2/10] Loading tariff tweet data from v5 JSON (corrected timestamps)...")
+print("[2/10] Loading tariff tweet data from CSV...")
 
-# Load tweets from v5 JSON
+# Load tweets from CSV
 try:
-    with open('Data Collection and Cleaning/tariff_classified_tweets_full_v5.json', 'r') as f:
-        tweets_data = json.load(f)
-    tweets_df = pd.DataFrame(tweets_data)
+    tweets_df = pd.read_csv('tariff_classified_tweets_announced.csv')
     print(f"  ✓ Total tweets loaded: {len(tweets_df)}")
 except Exception as e:
     print(f"  ERROR: Could not load tweet data: {e}")
@@ -156,46 +154,29 @@ except Exception as e:
 tariff_tweets = tweets_df[tweets_df['is_tariff_related'] == True].copy()
 print(f"  ✓ Tariff-related tweets: {len(tariff_tweets)}")
 
-# Filter by tariff_action_type (announcing or threatening only)
-print(f"\n  Tariff action type breakdown (all tariff tweets):")
-for action_type, count in tariff_tweets['tariff_action_type'].value_counts().items():
-    print(f"    {action_type}: {count}")
+# Filter by announcement_type (ANNOUNCING or THREATENING only)
+print(f"\n  Announcement type breakdown (all tariff tweets):")
+for ann_type, count in tariff_tweets['announcement_type'].value_counts().items():
+    print(f"    {ann_type}: {count}")
 
 tariff_tweets = tariff_tweets[
-    tariff_tweets['tariff_action_type'].isin(['announcing', 'threatening'])
+    tariff_tweets['announcement_type'].isin(['ANNOUNCING', 'THREATENING'])
 ].copy()
-print(f"\n  ✓ Filtered to announcing or threatening: {len(tariff_tweets)} events")
+print(f"\n  ✓ Filtered to ANNOUNCING or THREATENING: {len(tariff_tweets)} events")
 
 # Filter by countries_mentioned containing 'China'
-def contains_china(countries):
-    """Check if China is in the countries list"""
-    # Handle None
-    if countries is None:
-        return False
-    # Handle list (from JSON) - this is the primary case
-    if isinstance(countries, list):
-        return 'China' in countries
-    # Handle empty string
-    if isinstance(countries, str):
-        if countries.strip() == '':
-            return False
-        # If it's a string representation of a list, try to parse it
-        try:
-            import ast
-            countries_list = ast.literal_eval(countries)
-            return 'China' in countries_list
-        except:
-            return False
-    # Handle other types (floats for NaN, etc.)
+import ast
+def contains_china(countries_str):
     try:
-        if pd.isna(countries):
+        if pd.isna(countries_str) or countries_str == '':
             return False
+        countries = ast.literal_eval(countries_str)
+        return 'China' in countries
     except:
-        pass
-    return False
+        return False
 
 tariff_tweets['has_china'] = tariff_tweets['countries_mentioned'].apply(contains_china)
-print(f"\n  Countries breakdown (announcing/threatening):")
+print(f"\n  Countries breakdown (ANNOUNCING/THREATENING):")
 print(f"    With China: {tariff_tweets['has_china'].sum()}")
 print(f"    Without China: {(~tariff_tweets['has_china']).sum()}")
 
@@ -226,8 +207,8 @@ for idx, tweet in tariff_tweets.iterrows():
             'tariff_type': tweet.get('tariff_type', 'General'),
             'countries_mentioned': tweet.get('countries_mentioned', []),
             'tariff_percentage': tweet.get('tariff_percentage', ''),
-            'tariff_action_type': tweet.get('tariff_action_type', 'no_mention'),
-            'tariff_effective_date': tweet.get('tariff_effective_date', ''),
+            'announcement_type': tweet.get('announcement_type', ''),
+            'effective_date': tweet.get('effective_date', ''),
         })
     except Exception as e:
         # Skip tweets with unparseable timestamps
@@ -241,9 +222,9 @@ print(f"    Date range: {tariff_df['datetime'].min()} to {tariff_df['datetime'].
 print(f"    Sentiment breakdown:")
 for sentiment, count in tariff_df['sentiment'].value_counts().items():
     print(f"      {sentiment}: {count}")
-print(f"    Tariff action type breakdown:")
-for action_type, count in tariff_df['tariff_action_type'].value_counts().items():
-    print(f"      {action_type}: {count}")
+print(f"    Announcement type breakdown:")
+for ann_type, count in tariff_df['announcement_type'].value_counts().items():
+    print(f"      {ann_type}: {count}")
 print()
 
 # ==================== CONTROL GROUP GENERATION ====================
